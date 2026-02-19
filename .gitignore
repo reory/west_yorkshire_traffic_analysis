@@ -6,3 +6,6 @@ streamlit/
 tests/
 pytest.ini
 dev_tools/
+dev_tools/
+__pycache__/
+*.pyc
