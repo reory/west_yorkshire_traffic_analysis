@@ -29,13 +29,13 @@ st.set_page_config(page_title='West Yorkshire Traffic Analysis', layout='wide')
 
 @st.cache_data
 def get_data():
-    return load_wy_data('../data/accidents.csv')
+    return load_wy_data('data/accidents.csv')
 
 @st.cache_data
 def get_linked_assets(ids):
     # Ensure paths are relative to the project root
-    veh = load_linked_data('../data/vehicles.csv', ids)
-    cas = load_linked_data("../data/casualties.csv", ids)
+    veh = load_linked_data('data/vehicles.csv', ids)
+    cas = load_linked_data("data/casualties.csv", ids)
     print("--- Casualty Columns ---")
     print(cas.columns.tolist())
     return veh, cas
