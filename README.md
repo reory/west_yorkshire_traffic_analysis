@@ -25,9 +25,19 @@ Beyond the interactive map, this project includes a deep-dive statistical analys
 * `src/`: Backend logic for data processing and mappings.
 * `West_Yorkshire_Report.pdf`: The final analytical summary.
 
+
 ## 🚀 Installation & Local Use
 1. Clone: `git clone https://github.com/reory`
 2. Install: `pip install -r requirements.txt`
 3. Run: `streamlit run app.py`
+
+## 🙏 Acknowledgments & Thanks
+
+A huge thank you to:
+* **Department for Transport (DfT):** For providing the open-source road safety data that makes this analysis possible.
+* **The Streamlit Community:** For the incredible tools and support that help bring data to life.
+* **West Yorkshire Authorities:** For their ongoing work in improving road safety across our region.
+
+Special thanks to my family for their "rigorous" bug testing and support during the late-night coding sessions! 🍻
 
 **Developed by:** Roy Peters | Leeds, UK
