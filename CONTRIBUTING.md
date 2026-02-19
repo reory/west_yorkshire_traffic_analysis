@@ -18,11 +18,4 @@ First off, thank you for considering to contribute to this project and my others
 
 ---
 
-## 🙏 Acknowledgments & Thanks
 
-A huge thank you to:
-* **Department for Transport (DfT):** For providing the open-source road safety data that makes this analysis possible.
-* **The Streamlit Community:** For the incredible tools and support that help bring data to life.
-* **West Yorkshire Authorities:** For their ongoing work in improving road safety across our region.
-
-Special thanks to my family for their "rigorous" bug testing and support during the late-night coding sessions! 🍻
