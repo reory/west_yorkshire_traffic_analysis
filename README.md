@@ -39,6 +39,7 @@ The "Analytical Backend." This script handles the heavy lifting of data visualiz
 * **Folium/Leaflet**: For interactive geospatial mapping.
 * **Matplotlib/Seaborn**: For forensic chart generation.
 * **FPDF/ReportLab**: For automated PDF document creation.
+* **reverse-geocoder**: For high-speed, offline reverse geocoding of incident coordinates into                           human-readable locations.
 
 ---
 
