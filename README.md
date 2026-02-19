@@ -1,43 +1,61 @@
-# West Yorkshire Traffic Safety Intelligence 🚗📊
+# 🚦 West Yorkshire Traffic Analysis & Forensic Reporting
 
-### [🚀 View Live Dashboard](https://share.streamlit.io/reory/west_yorkshire_traffic_analysis/main/app.py) 
+An interactive intelligence dashboard and automated reporting tool built to analyze road safety data across West Yorkshire. This project transforms raw government datasets into actionable insights using a modern Python stack.
 
-## 📖 Project Overview
-An interactive geographic intelligence dashboard analyzing **2024 STATS19 traffic safety data** specifically for the West Yorkshire region. This tool visualizes over 1,600 incidents, providing local authorities and researchers with the ability to filter by severity, road conditions, and casualty demographics to identify high-risk hotspots.
+## 🚀 Live Demo
+**Check out the live dashboard here:** [https://westyorkshiretrafficanalysis-s4uloec7gumf65rz2thpl3.streamlit.app/]
 
-## 📈 Visual Analytics & Reporting
-Beyond the interactive map, this project includes a deep-dive statistical analysis:
-* **Forensic Charts:** Time-series analysis and vehicle-type distributions (available in the `output_charts/` folder).
-* **Final Report:** A comprehensive PDF summary of findings, including identifying the most frequent vehicle involvements (e.g., VW Golf) and fatal incident profiles.
+---
 
-> **Note:** The data has been optimized and "trimmed" from the national UK dataset to focus exclusively on West Yorkshire, reducing file size by 90% for lightning-fast performance.
+## 🛠️ Project Architecture
+This project is divided into two main components to balance real-time interaction with deep-dive analysis:
 
-## 🛠️ Tech Stack
-* **Python / Streamlit:** Web interface and interactivity.
-* **Pandas / NumPy:** High-speed data filtering and cleaning.
-* **Folium:** Geospatial mapping and cluster visualization.
-* **Matplotlib:** Static chart generation for reporting.
+### 1. Interactive Dashboard (`app.py`)
+The "Frontend" of the project. It provides a real-time interface for users to explore the data.
+* **Dynamic Geospatial Mapping:** Visualizes accident hotspots across Leeds, Bradford, Wakefield, Kirklees, and Calderdale.
+* **Instant Filtering:** Filter by Severity (Fatal, Serious, Slight), Year, Weather, and Road Type.
+* **Key Metrics:** High-level KPIs that update instantly based on user selection.
 
-## 📂 Project Structure
-* `app.py`: The live web application.
-* `data/`: Processed West Yorkshire CSV files.
-* `output_charts/`: PNG exports of incident trends.
-* `src/`: Backend logic for data processing and mappings.
-* `West_Yorkshire_Report.pdf`: The final analytical summary.
+### 2. Forensic Reporting Engine (`main.py`)
+The "Analytical Backend." This script handles the heavy lifting of data visualization and document generation.
+* **16 Custom Charts:** Generates a comprehensive suite of visualizations (Trend lines, Hourly heatmaps, Vehicle type distributions).
+* **Automated PDF Generation:** Compiles all 16 charts into a professional forensic report (`West_Yorkshire_Report.pdf`) for offline review.
 
+---
 
-## 🚀 Installation & Local Use
-1. Clone: `git clone https://github.com/reory`
-2. Install: `pip install -r requirements.txt`
-3. Run: `streamlit run app.py`
+## 📁 File Structure
+* **`app.py`**: Entry point for the Streamlit web application.
+* **`main.py`**: Logic for chart generation and PDF reporting.
+* **`src/`**: Modularized helper scripts (`load_data.py`, `filters.py`, `map_utils.py`).
+* **`data/`**: Regionalized West Yorkshire datasets (Accidents, Vehicles, Casualties).
+* **`reports/`**: Destination folder for generated PDF forensic analyses.
 
-## 🙏 Acknowledgments & Thanks
+---
 
-A huge thank you to:
-* **Department for Transport (DfT):** For providing the open-source road safety data that makes this analysis possible.
-* **The Streamlit Community:** For the incredible tools and support that help bring data to life.
-* **West Yorkshire Authorities:** For their ongoing work in improving road safety across our region.
+## 🧰 Tech Stack
+* **Python 3.10** (Development Environment)
+* **Streamlit**: For the web interface.
+* **Pandas**: For high-performance data manipulation.
+* **Folium/Leaflet**: For interactive geospatial mapping.
+* **Matplotlib/Seaborn**: For forensic chart generation.
+* **FPDF/ReportLab**: For automated PDF document creation.
 
-Special thanks to my family for their "rigorous" bug testing and support during the late-night coding sessions! 🍻
+---
 
-**Developed by:** Roy Peters | Leeds, UK
+## ⚙️ Installation & Local Usage
+To run this project locally:
+1. Clone the repo: `git clone https://github.com/reory/west_yorkshire_traffic_analysis.git`
+2. Install dependencies: `pip install -r requirements.txt`
+3. Launch the app: `streamlit run app.py`
+
+---
+
+## 🙏 Acknowledgments
+* **Data Source:** UK Department for Transport (DfT) Open Data.
+* **Community:** Thanks to the Streamlit and Python communities for the robust library support.
+* **Testing:** Special thanks to my family for "Quality Assurance" and bug reporting! 🍻
+
+---
+
+## ⚖️ License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
