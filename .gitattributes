@@ -1,0 +1,9 @@
+# Ignore HTML-heavy folders so Python shows correctly
+screenshots/* linguist-vendored
+assets/* linguist-vendored
+reports/* linguist-vendored
+static/* linguist-vendored
+public/* linguist-vendored
+
+# Ignore standalone HTML files (Streamlit exports, templates, etc.)
+*.html linguist-vendored
