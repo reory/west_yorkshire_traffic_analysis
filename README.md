@@ -7,6 +7,9 @@ An interactive intelligence dashboard and automated reporting tool built to anal
 
 ---
 
+### 📸 Screenshots
+See the full gallery here: [screenshots/](screenshots/)
+
 ## 🛠️ Project Architecture
 This project is divided into two main components to balance real-time interaction with deep-dive analysis:
 
