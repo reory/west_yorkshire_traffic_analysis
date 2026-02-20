@@ -1,11 +1,13 @@
-__pycache__/
-*.pyc
+# Environment & Virtual Machine
 venv/
 .env
+
+# Python internals
+__pycache__/
+*.pyc
+
+# Project specific
+dev_tools/
 streamlit/
 tests/
 pytest.ini
-dev_tools/
-dev_tools/
-__pycache__/
-*.pyc
