@@ -7,7 +7,7 @@ An interactive intelligence dashboard and automated reporting tool built to anal
 
 ---
 
-### 📸 Screenshots
+## 📸 Screenshots
 See the full gallery here: [screenshots/](screenshots/)
 
 ## 🛠️ Project Architecture
