@@ -1,5 +1,21 @@
 # 🚦 West Yorkshire Traffic Analysis & Forensic Reporting
 
+<p align="center">
+
+  <!-- Data & Analysis -->
+  <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" />
+  <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" />
+  <img src="https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge&logo=python&logoColor=white" />
+
+  <!-- Geo & Mapping -->
+  <img src="https://img.shields.io/badge/Folium-77B829?style=for-the-badge&logo=leaflet&logoColor=white" />
+  <img src="https://img.shields.io/badge/Reverse%20Geocoder-4B8BBE?style=for-the-badge&logo=python&logoColor=white" />
+
+  <!-- App Framework -->
+  <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" />
+
+</p>
+
 An interactive intelligence dashboard and automated reporting tool built to analyze road safety data across West Yorkshire. This project transforms raw government datasets into actionable insights using a modern Python stack.
 
 ## 🚀 Live Demo
