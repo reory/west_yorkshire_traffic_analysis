@@ -47,7 +47,7 @@ The "Analytical Backend." This script handles the heavy lifting of data visualiz
 * **`main.py`**: Logic for chart generation and PDF reporting.
 * **`src/`**: Modularized helper scripts (`load_data.py`, `filters.py`, `map_utils.py`).
 * **`data/`**: Regionalized West Yorkshire datasets (Accidents, Vehicles, Casualties).
-* **`reports/`**: Destination folder for generated PDF forensic analyses.
+* **`output_charts/`**: Destination folder for generated PDF forensic analyses.
 
 ---
 
@@ -58,7 +58,7 @@ The "Analytical Backend." This script handles the heavy lifting of data visualiz
 * **Folium/Leaflet**: For interactive geospatial mapping.
 * **Matplotlib/Seaborn**: For forensic chart generation.
 * **FPDF/ReportLab**: For automated PDF document creation.
-* **reverse-geocoder**: For high-speed, offline reverse geocoding of incident coordinates into                           human-readable locations.
+* **reverse-geocoder**: For high-speed, offline reverse geocoding of incident       coordinates into human-readable locations.
 
 ---
 
