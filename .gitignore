@@ -9,5 +9,4 @@ __pycache__/
 # Project specific
 dev_tools/
 streamlit/
-tests/
 pytest.ini
