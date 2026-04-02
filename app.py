@@ -5,7 +5,6 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import streamlit as st
-import pandas as pd
 from streamlit_folium import st_folium
 from src.load_data import load_wy_data, load_linked_data
 from src.mappings import ui_mappings
@@ -89,7 +88,7 @@ else:
     display_df = filtered_df
 #---------------------------------------------------------------
 # --- MAIN DASHBOARD ---
-st.title(f'West Yorkshire Traffic Analysis:🚦')
+st.title('West Yorkshire Traffic Analysis:🚦')
 st.subheader(f'Insights and Hotspots for {selected_year}')
 st.markdown('---')
 

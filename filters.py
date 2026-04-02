@@ -1,6 +1,3 @@
-import streamlit as st
-import pandas as pd
-
 def apply_filters(df, cas_df, weather_choice, severity_choice, light_choice, 
                   surface_choice, road_type_choice, age_choice, 
                   selected_genders, ui_mappings):
