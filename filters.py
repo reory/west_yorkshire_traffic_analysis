@@ -44,8 +44,8 @@ def apply_filters(df, cas_df, weather_choice, severity_choice, light_choice,
     # Light Conditions
     if light_choice:
        inv_light = {v: k for k, v in ui_mappings['light'].items()}
-       target_l = [inv_light[l] for l in light_choice]
-       filtered_df = filtered_df[filtered_df['light_conditions'].isin(target_l)]
+       target_lght = [inv_light[lght] for lght in light_choice]
+       filtered_df = filtered_df[filtered_df['light_conditions'].isin(target_lght)]
 
     # Road Surface
     if surface_choice:
