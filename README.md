@@ -23,7 +23,8 @@
 An interactive intelligence dashboard and automated reporting tool built to analyze road safety data across West Yorkshire. This project transforms raw government datasets into actionable insights using a modern Python stack.
 
 ## 🚀 Live Demo
-**Check out the live dashboard here:** [https://westyorkshiretrafficanalysis-s4uloec7gumf65rz2thpl3.streamlit.app/]
+**Check out the live dashboard here:** 
+[![Open in Streamlit](https://img.shields.io/badge/Streamlit-App-red?logo=streamlit)](https://westyorkshiretrafficanalysis-s4uloec7gumf65rz2thpl3.streamlit.app/)
 
 ---
 
