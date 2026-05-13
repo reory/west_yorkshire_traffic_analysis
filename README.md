@@ -22,14 +22,34 @@
 
 An interactive intelligence dashboard and automated reporting tool built to analyze road safety data across West Yorkshire. This project transforms raw government datasets into actionable insights using a modern Python stack.
 
-## 🚀 Live Demo
-**Check out the live dashboard here:** 
-[![Open in Streamlit](https://img.shields.io/badge/Streamlit-App-red?logo=streamlit)](https://westyorkshiretrafficanalysis-s4uloec7gumf65rz2thpl3.streamlit.app/)
-
 ---
 
-## 📸 Screenshots
-See the full gallery here: [screenshots/](screenshots/)
+<details>
+  <summary>📸 Screenshots</summary>
+
+See the full gallery here: 
+![screenshots](screenshots/Figure_1.png)
+![screenshots](screenshots/Figure_2.png)
+![screenshots](screenshots/Figure_3.png)
+![screenshots](screenshots/Figure_4.png)
+![screenshots](screenshots/Figure_5.png)
+![screenshots](screenshots/Figure_6.png)
+![screenshots](screenshots/Figure_7.png)
+![screenshots](screenshots/Figure_8.png)
+![screenshots](screenshots/Figure_9.png)
+![screenshots](screenshots/Figure_10.png)
+![screenshots](screenshots/folium_map1.png)
+![screenshots](screenshots/folium_map2.png)
+![screenshots](screenshots/motorway.png)
+![screenshots](screenshots/sidebar1.png)
+![screenshots](screenshots/dashboard1.png)
+![screenshots](screenshots/dashboard2.png)
+![screenshots](screenshots/dashboard3.png)
+![screenshots](screenshots/heatmap.png)
+![screenshots](screenshots/west_yorkshire.png)
+</details>
+
+---
 
 ## 🛠️ Project Architecture
 This project is divided into two main components to balance real-time interaction with deep-dive analysis:
