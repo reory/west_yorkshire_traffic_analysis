@@ -1,6 +1,7 @@
 # Environment & Virtual Machine
 venv/
 .env
+.coverage
 
 # Python internals
 __pycache__/
