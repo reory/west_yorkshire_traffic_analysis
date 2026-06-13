@@ -73,6 +73,7 @@ The "Analytical Backend." This script handles the heavy lifting of data visualiz
 * **`src/`**: Modularized helper scripts (`load_data.py`, `filters.py`, `map_utils.py`).
 * **`data/`**: Regionalized West Yorkshire datasets (Accidents, Vehicles, Casualties).
 * **`output_charts/`**: Destination folder for generated PDF forensic analyses.
+* **`tests/`** Pytest/Hypothesis suite.
 
 ---
 
