@@ -11,3 +11,4 @@ __pycache__/
 dev_tools/
 streamlit/
 pytest.ini
+.pytest_cache/
