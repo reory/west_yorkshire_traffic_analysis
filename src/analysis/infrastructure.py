@@ -1,4 +1,3 @@
-import pandas as pd
 from src.charts import bar_chart, pie_chart
 from src.mappings import urban_rural_labels
 

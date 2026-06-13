@@ -1,4 +1,3 @@
-import pandas as pd
 from src.charts import pie_chart, bar_chart
 from src.mappings import (
 casualty_class_labels, 

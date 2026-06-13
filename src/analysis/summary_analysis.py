@@ -58,15 +58,15 @@ def run_comprehensive_summary(df, vehicles_df):
     report_lines.append(f"TOTAL DATASET: {total_accidents} records analyzed.")
     report_lines.append(f"MOTORWAY SCOPE: {motorway_count} incidents ({motorway_pct:.1f}% of total).")
     report_lines.append("") # Space in the PDF document.
-    report_lines.append(f"PROFILED RISK GROUPS:")
+    report_lines.append("PROFILED RISK GROUPS:")
     report_lines.append(f" - Primary Driver Gender: {top_gender_text}")
     report_lines.append(f" - Most Frequent Vehicle: {top_vehicle_text}")
     report_lines.append("") 
-    report_lines.append(f"ENVIRONMENTAL PROFILE:")
+    report_lines.append("ENVIRONMENTAL PROFILE:")
     report_lines.append(f" - Predominant Weather: {weather_labels.get(top_weather, top_weather)}")
     report_lines.append(f" - Predominant Lighting: {light_labels.get(top_light, top_light)}")
     report_lines.append("")
-    report_lines.append(f"SEVERITY RISK:")
+    report_lines.append("SEVERITY RISK:")
     for sev, count in severity_counts.items():
         report_lines.append(f" - {sev}: {count}")
     report_lines.append("")

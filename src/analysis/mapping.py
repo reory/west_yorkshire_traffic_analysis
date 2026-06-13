@@ -1,7 +1,6 @@
 import webbrowser
 import os
 import folium
-import time
 import reverse_geocoder as rg # better than geopy to stop hitting apis.
 from folium.plugins import MarkerCluster
 from src.mappings import severity_labels
