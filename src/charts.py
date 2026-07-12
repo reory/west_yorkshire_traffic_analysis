@@ -17,6 +17,11 @@ plt.style.use("grayscale")
 
 
 def bar_chart(series, title, xlabel, ylabel, color=None):
+    """
+    Create and display a bar chart from the
+    given data series with labels and optional color.
+    """
+
     plt.figure(figsize=(12, 16))
     series.plot(kind="bar", color=color)
     plt.title(title, fontsize=18)
@@ -27,9 +32,7 @@ def bar_chart(series, title, xlabel, ylabel, color=None):
     plt.tight_layout()
 
     # Save charts insted of plt.show(). plt.show() causes weird behaviour.
-    clean_title = (
-        title.replace(" ", "_").replace("(", "").replace(")", "") + ".png"
-    )
+    clean_title = title.replace(" ", "_").replace("(", "").replace(")", "") + ".png"
     filename = f"{clean_title}"
     save_path = os.path.join("output_charts", filename)
     plt.savefig(save_path)
@@ -39,6 +42,11 @@ def bar_chart(series, title, xlabel, ylabel, color=None):
 
 
 def stacked_bar_chart(df_comparison, title, xlabel, ylabel, colors):
+    """
+    Create and display a stacked bar chart from the comparison
+    DataFrame using the given labels and colours.
+    """
+
     # This uses your master height of 16
     plt.figure(figsize=(12, 16))
     df_comparison.plot(kind="bar", stacked=True, color=colors, ax=plt.gca())
@@ -56,6 +64,11 @@ def stacked_bar_chart(df_comparison, title, xlabel, ylabel, colors):
 
 
 def pie_chart(series, title, colors=None, pctdistance=1.0, labeldistance=1.05):
+    """
+    Create and display a pie chart from the given
+    data series with optional colours and label spacing.
+    """
+
     plt.figure(figsize=(12, 16))
 
     # Label styling.
@@ -75,9 +88,7 @@ def pie_chart(series, title, colors=None, pctdistance=1.0, labeldistance=1.05):
 
     # Save charts insted of plt.show(). plt.show() causes weird behaviour.
 
-    clean_title = (
-        title.replace(" ", "_").replace("(", "").replace(")", "") + ".png"
-    )
+    clean_title = title.replace(" ", "_").replace("(", "").replace(")", "") + ".png"
     filename = f"{clean_title}"
     save_path = os.path.join("output_charts", filename)
     plt.savefig(save_path)
@@ -100,7 +111,6 @@ def generate_blackspots_chart(
     top_counts = []
 
     for spot in hotspots_data:
-
         # Use 'site_label' which contains the coordinates + area name
         area = spot["area"]
         road_context = spot["road_type"]

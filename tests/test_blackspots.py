@@ -1,4 +1,4 @@
-import pytest
+import pytest #noqa
 import pandas as pd
 from src.analysis.blackspots import identify_blackspots
 

@@ -1,6 +1,5 @@
 import pytest
 import os
-import shutil
 import base64
 from src.analysis.report_generator import generate_pdf_report
 
