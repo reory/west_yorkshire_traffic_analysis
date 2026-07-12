@@ -10,6 +10,5 @@ __pycache__/
 # Project specific
 dev_tools/
 streamlit/
-pytest.ini
 .pytest_cache/
 htmlcov/
