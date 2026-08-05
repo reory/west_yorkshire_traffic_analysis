@@ -1,6 +1,10 @@
-import pandas as pd
+
 from unittest.mock import patch
-from src.load_data import load_linked_data, load_wy_data, get_data_period
+
+import pandas as pd
+import pytest
+
+from src.load_data import get_data_period, load_linked_data, load_wy_data
 
 
 def test_load_linked_data_filters_correctly():
@@ -23,9 +27,19 @@ def test_load_linked_data_renames_accident_index():
 
 
 def test_load_linked_data_exception_returns_empty():
-    with patch("src.load_data.pd.read_csv", side_effect=Exception("fail")):
+    with patch(
+        "src.load_data.pd.read_csv", 
+        side_effect=FileNotFoundError("bad.csv"
+    )):
         result = load_linked_data("bad.csv", target_indices=["A"])
         assert result.empty
+
+def test_load_linked_data_unexpected_exception_propagates():
+    with (
+        patch("src.load_data.pd.read_csv", side_effect=RuntimeError("totally unexpected")),
+        pytest.raises(RuntimeError),
+    ):
+        load_linked_data("bad.csv", target_indices=["A"])
 
 
 def test_load_wy_data_full_cleaning():

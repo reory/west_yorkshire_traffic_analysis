@@ -1,25 +1,37 @@
 import matplotlib.pyplot as plt
-plt.style.use('grayscale')
-import time
-import os
-from src.load_data import load_wy_data, load_linked_data, get_data_period
-from src.charts import generate_blackspots_chart
 
-from src.analysis.geography import run_geographical_suite
-from src.analysis.environmental import run_environmental_suite
-from src.analysis.infrastructure import run_infrastructure_suite
-from src.analysis.temporal import run_temporal_suite
-from src.analysis.mapping import generate_severity_map
-from src.analysis.summary_analysis import run_comprehensive_summary
+plt.style.use('grayscale')
+import logging
+import os
+import time
+
+import pandas as pd
+
 from src.analysis.blackspots import identify_blackspots
 from src.analysis.demographics import run_demographic_suite
+from src.analysis.environmental import run_environmental_suite
+from src.analysis.geography import run_geographical_suite
+from src.analysis.infrastructure import run_infrastructure_suite
+from src.analysis.mapping import generate_severity_map
 from src.analysis.report_generator import generate_pdf_report
+from src.analysis.summary_analysis import run_comprehensive_summary
+from src.analysis.temporal import run_temporal_suite
+from src.charts import generate_blackspots_chart
+from src.load_data import get_data_period, load_linked_data, load_wy_data
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+)
 
 def main():
     """Load the data (West Yorkshire filtered)"""
-    
-    #print("Loading West Yorkshire collison data...")
-    df = load_wy_data("data/accidents.csv")
+
+    try:
+        df = load_wy_data("data/accidents.csv")
+    except (FileNotFoundError, pd.errors.ParserError, pd.errors.EmptyDataError):
+        print("Error: No data loaded. Please check the file path.")
+        return
 
     if df is None or df.empty:
         # Error notification.
@@ -83,7 +95,7 @@ def main():
     # Final summary report.
     end_time = time.time()
     duration = round(end_time - start_time, 2)
-    #print(f"\n Analysis complete! Total processing time: {duration} seconds")
+    print(f"\n Analysis complete! Total processing time: {duration} seconds")
     
     # At the very end of Main.py
     generated_files = os.listdir("output_charts")

@@ -1,11 +1,5 @@
-import pandas as pd
 from src.charts import bar_chart
-from src.mappings import(
-    weather_labels,
-    light_labels,
-    surface_labels,
-    special_labels
-)
+from src.mappings import light_labels, special_labels, surface_labels, weather_labels
 
 #print(silence debugging prints, turn on when ready)
 

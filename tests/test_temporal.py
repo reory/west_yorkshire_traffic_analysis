@@ -1,9 +1,11 @@
-import pandas as pd
 from unittest.mock import patch
+
+import pandas as pd
+
 from src.analysis.temporal import (
     analyse_hour_distribution,
-    analyse_weekday_distribution,
     analyse_month_distribution,
+    analyse_weekday_distribution,
     run_temporal_suite,
 )
 

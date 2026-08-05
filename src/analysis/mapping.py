@@ -1,21 +1,26 @@
-import webbrowser
+import logging
 import os
+import webbrowser
+
 import folium
-import reverse_geocoder as rg # better than geopy to stop hitting apis.
+import reverse_geocoder as rg  # better than geopy to stop hitting apis.
 from folium.plugins import MarkerCluster
+
 from src.mappings import severity_labels
+
+logger = logging.getLogger(__name__)
 
 def get_address(lat, lon):
     """Translate the coordinates into a human readable street name. (OFFLINE)"""
 
     # Initiate the try block.
     try:
-        # Add a timeout for web requests.
         results = rg.search((lat, lon))
         if results:
             area = results[0].get('name', 'Unknown Area')
             return area
-    except Exception:
+    except (ValueError, TypeError)as e:
+        logger.warning(f"Area lookup failed for ({lat}, {lon}): {e!s}")
         return "Area Lookup Failed"
     return "Unknown Location"
 

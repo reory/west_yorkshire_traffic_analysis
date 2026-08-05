@@ -1,9 +1,11 @@
-import pandas as pd
 from unittest.mock import patch
+
+import pandas as pd
+
 from src.analysis.infrastructure import (
     analyse_road_type_distribution,
-    analyse_urban_rural_proportion,
     analyse_speed_limit_distribution,
+    analyse_urban_rural_proportion,
     run_infrastructure_suite,
 )
 

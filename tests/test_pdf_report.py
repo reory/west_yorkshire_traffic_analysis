@@ -1,7 +1,10 @@
-import pytest
-import os
 import base64
+import os
+
+import pytest
+
 from src.analysis.report_generator import generate_pdf_report
+
 
 def test_generate_pdf_report_flow(tmp_path):
     """Verifies the PDF is created and handles missing assets."""

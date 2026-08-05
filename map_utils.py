@@ -1,7 +1,10 @@
-import folium
-from folium.plugins import MarkerCluster, HeatMap
-import pandas as pd
+import logging
 
+import folium
+import pandas as pd
+from folium.plugins import HeatMap, MarkerCluster
+
+logger = logging.getLogger(__name__)
 
 def render_incident_map(display_df, cas_df, veh_df, show_blackspots, ui_mappings):
     """
@@ -74,7 +77,8 @@ def render_incident_map(display_df, cas_df, veh_df, show_blackspots, ui_mappings
             vehicle_summary = (
                 ", ".join(set(veh_details)) if veh_details else "Unknown Vehicle"
             )
-        except Exception:
+        except (TypeError, AttributeError) as e:
+            logger.warning(f"Could not build vehicle summary for {this_id}: {e!s}")
             vehicle_summary = "Vehicle Data Missing"
 
         # Translate codes using our mappings

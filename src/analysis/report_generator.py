@@ -1,8 +1,9 @@
-from fpdf import FPDF
-from datetime import datetime
 import os
+from datetime import datetime, timezone
 
-now = datetime.now()
+from fpdf import FPDF
+
+now = datetime.now(timezone.utc)
 timestamp = now.strftime("%d/%m/%Y %H:%M:%S")
 
 class WYTrafficReport(FPDF):

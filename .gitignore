@@ -12,3 +12,4 @@ dev_tools/
 streamlit/
 .pytest_cache/
 htmlcov/
+.ruff_cache/

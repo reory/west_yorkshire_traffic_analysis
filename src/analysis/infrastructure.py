@@ -1,6 +1,7 @@
 from src.charts import bar_chart, pie_chart
 from src.mappings import urban_rural_labels
 
+
 def analyse_road_type_distribution(df):
     """Analyzes collisions by road layout (Roundabouts, Single carriageways, etc)"""
 

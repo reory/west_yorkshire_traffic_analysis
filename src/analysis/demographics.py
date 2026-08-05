@@ -1,9 +1,5 @@
-from src.charts import pie_chart, bar_chart
-from src.mappings import (
-casualty_class_labels, 
-age_band_labels, 
-gender_options
-)
+from src.charts import bar_chart, pie_chart
+from src.mappings import age_band_labels, casualty_class_labels, gender_options
 
 #print(silence debugging prints, turn on when ready)
 

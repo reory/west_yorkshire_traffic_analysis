@@ -1,5 +1,7 @@
-import pandas as pd
 from unittest.mock import patch
+
+import pandas as pd
+
 from src.analysis.demographics import run_demographic_suite
 
 

@@ -1,11 +1,13 @@
 import os
+from unittest.mock import MagicMock, patch
+
 import pandas as pd
-from unittest.mock import patch, MagicMock
+
 from src.charts import (
     bar_chart,
-    stacked_bar_chart,
-    pie_chart,
     generate_blackspots_chart,
+    pie_chart,
+    stacked_bar_chart,
 )
 
 

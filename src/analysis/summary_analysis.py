@@ -1,11 +1,5 @@
-import pandas as pd
 from src.charts import pie_chart
-from src.mappings import (
-    severity_labels, 
-    weather_labels, 
-    light_labels, 
-    gender_options
-)
+from src.mappings import gender_options, light_labels, severity_labels, weather_labels
 
 #print(silence debugging prints, turn on when ready)
 

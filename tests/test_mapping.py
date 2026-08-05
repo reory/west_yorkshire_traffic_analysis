@@ -1,6 +1,9 @@
+from unittest.mock import MagicMock, patch
+
 import pandas as pd
-from unittest.mock import patch, MagicMock
-from src.analysis.mapping import get_address, generate_severity_map
+import pytest
+
+from src.analysis.mapping import generate_severity_map, get_address
 
 
 def test_get_address_success():
@@ -23,9 +26,21 @@ def test_get_address_empty_result():
 
 def test_get_address_exception():
 
-    with patch("src.analysis.mapping.rg.search", side_effect=Exception("fail")):
+    with patch(
+        "src.analysis.mapping.rg.search", side_effect=ValueError("bad_coordinates")):
         result = get_address(53.8, -1.5)
         assert result == "Area Lookup Failed"
+
+
+def test_get_address_unexpected_exception_propagates():
+    with (
+        patch(
+            "src.analysis.mapping.rg.search", 
+            side_effect=RuntimeError("totally unexpected")
+        ),
+        pytest.raises(RuntimeError),
+    ):
+        get_address(53.8, -1.5)
 
 
 def test_generate_severity_map_basic():

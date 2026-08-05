@@ -1,6 +1,6 @@
-import pandas as pd
 import numpy as np
-import reverse_geocoder as rg # offline tool for the blackspots coordinates.
+import reverse_geocoder as rg  # offline tool for the blackspots coordinates.
+
 
 def identify_blackspots(df, top_n=10, min_accidents=2):
     """Uses NumPy, Pandas and Geocoder to identify 

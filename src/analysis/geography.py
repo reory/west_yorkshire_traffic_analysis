@@ -1,7 +1,7 @@
 import pandas as pd
-import matplotlib.pyplot as plt
-from src.charts import pie_chart, bar_chart, stacked_bar_chart
-from src.mappings import severity_labels, district_names
+
+from src.charts import stacked_bar_chart
+from src.mappings import district_names, severity_labels
 
 #Below def method has already been taken care of.
 # Severity Distribution

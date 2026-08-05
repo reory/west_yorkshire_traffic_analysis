@@ -1,5 +1,7 @@
-import pandas as pd
 from unittest.mock import patch
+
+import pandas as pd
+
 from src.analysis.summary_analysis import run_comprehensive_summary
 
 

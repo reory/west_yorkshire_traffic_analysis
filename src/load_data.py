@@ -1,5 +1,10 @@
+import logging
+
 import pandas as pd
-from src.mappings import road_type_labels, road_class_labels, district_names
+
+from src.mappings import district_names, road_class_labels, road_type_labels
+
+logger = logging.getLogger(__name__)
 
 
 def load_linked_data(filepath, target_indices, index_col="collision_index"):
@@ -23,21 +28,29 @@ def load_linked_data(filepath, target_indices, index_col="collision_index"):
         # print(f" > Found {len(filtered_df)} related records.")
         return filtered_df
 
-    except Exception as e:
-        print(f"Error loading {filepath}: {e}")
+    except (
+        FileNotFoundError, 
+        pd.errors.ParserError, 
+        pd.errors.EmptyDataError,
+        KeyError
+    ):
+        logger.exception(f"Error loading {filepath}")
         return pd.DataFrame()  # Return empty if it fails.
 
 
 def load_wy_data(path="data/accidents.csv"):
-
-    # Load the dataset.
-    df = pd.read_csv(path, low_memory=False)
+    
+    try:
+        df = pd.read_csv(path, low_memory=False)
+    except (FileNotFoundError, pd.errors.ParserError, pd.errors.EmptyDataError):
+        logger.exception(f"Failed to load primary dataset from {path}")
+        raise
 
     # Extract useful components from the date.
     df["date"] = pd.to_datetime(df["date"], errors="coerce")
 
     # This removes any row where the date couldn't be parsed (NAT ones)
-    df = df.dropna(subset=["date"])
+    df = df.dropna(subset=["date"]).copy()
 
     # Extract useful components from the year/month/day name.
     df["year"] = df["date"].dt.year  # type:ignore
@@ -76,7 +89,7 @@ def load_wy_data(path="data/accidents.csv"):
 
     # How many motorways are in West Yorkshire.
     wy_motorways = len(df_filtered[df_filtered["first_road_class"] == 1])
-    # print(f"Motorway accidents actually inside West Yorkshire: {wy_motorways}")
+    logger.info(f"Motorway accidents actually inside West Yorkshire: {wy_motorways}")
 
     return df_filtered
 

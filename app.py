@@ -1,16 +1,19 @@
 # Main streamlit script.
-import sys
 import os
+import sys
+
 # 1. PATH FIX: Tell Python to look one folder up for the 'src' directory
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import streamlit as st
 from streamlit_folium import st_folium
-from src.load_data import load_wy_data, load_linked_data
-from src.mappings import ui_mappings
+
+import sidebars
 from filters import apply_filters
 from map_utils import render_incident_map
-import sidebars
+from src.load_data import load_linked_data, load_wy_data
+from src.mappings import ui_mappings
+
 
 def reset_all_filters():
     # Only clear if there is actually something in memory.
