@@ -10,6 +10,8 @@ def apply_filters(
     selected_genders,
     ui_mappings,
 ):
+    """Filter accident and casualty DataFrames based on multi-category UI selections."""
+
     filtered_df = df.copy()
 
     # Severity

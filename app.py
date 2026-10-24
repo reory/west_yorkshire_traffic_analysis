@@ -16,6 +16,8 @@ from src.mappings import ui_mappings
 
 
 def reset_all_filters():
+    """Clear all keys from Streamlit session state and rerun the app."""
+
     # Only clear if there is actually something in memory.
     if st.session_state:
         for key in list(st.session_state.keys()):
@@ -31,10 +33,14 @@ st.set_page_config(page_title='West Yorkshire Traffic Analysis', layout='wide')
 
 @st.cache_data
 def get_data():
+    """Load and return accident data from the CSV file."""
+
     return load_wy_data('data/accidents.csv')
 
 @st.cache_data
 def get_linked_assets(ids):
+    """Load and return linked vehicle and casualty data for the specified IDs."""
+
     # Ensure paths are relative to the project root
     veh = load_linked_data('data/vehicles.csv', ids)
     cas = load_linked_data("data/casualties.csv", ids)

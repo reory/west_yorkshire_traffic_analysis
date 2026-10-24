@@ -5,6 +5,7 @@ from src.mappings import light_labels, special_labels, surface_labels, weather_l
 
 def analyse_weather_distribution(df):
     """Analyzes collisions based on weather (Rain, Snow, Icy, etc)"""
+
     df_local = df.copy()
     df_local["weather_label"] = df_local["weather_conditions"].map(weather_labels)
 
@@ -21,6 +22,7 @@ def analyse_weather_distribution(df):
 # Collisions by Light Conditions
 def analyse_light_condtions(df):
     """Analyse conditions based on Daylight vs Darkness."""
+
     light_data = df["light_conditions"].map(light_labels)
     light_counts = light_data.value_counts()
 
@@ -35,6 +37,7 @@ def analyse_light_condtions(df):
 # Collisions by Road Surface Conditions
 def analyse_road_surface(df):
     """Analyzes if the road was Dry, Wet or Icy."""
+
     surface_data = df["road_surface_conditions"].map(surface_labels)
     surface_counts = surface_data.value_counts()
 
@@ -49,6 +52,7 @@ def analyse_road_surface(df):
 # 4I — Special Conditions at Site
 def analyse_special_conditions(df):
     """Highlights site hazards like Roadworks or Oil, excluding 'normal'"""
+
     data = df["special_conditions_at_site"].map(special_labels)
     counts = data.value_counts()
 
@@ -70,6 +74,7 @@ def analyse_special_conditions(df):
 
 def run_environmental_suite(df):
     """Execute the environmental analysis."""
+
     analyse_weather_distribution(df)
     analyse_light_condtions(df)
     analyse_road_surface(df)

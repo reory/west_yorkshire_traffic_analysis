@@ -3,6 +3,7 @@ from src.charts import bar_chart
 
 def analyse_hour_distribution(df):
     """Shows when collisions peak during the day (Rush hour, etc)"""
+
     hour_counts = df["hour"].value_counts().sort_index()
 
     bar_chart(
@@ -58,6 +59,7 @@ def analyse_month_distribution(df):
 
 def run_temporal_suite(df):
     """Executes the full time series analysis."""
+
     analyse_hour_distribution(df)
     analyse_weekday_distribution(df)
     analyse_month_distribution(df)

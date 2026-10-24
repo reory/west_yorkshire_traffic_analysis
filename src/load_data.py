@@ -39,6 +39,7 @@ def load_linked_data(filepath, target_indices, index_col="collision_index"):
 
 
 def load_wy_data(path="data/accidents.csv"):
+    """Load the WY traffic data."""
     
     try:
         df = pd.read_csv(path, low_memory=False)
@@ -74,8 +75,10 @@ def load_wy_data(path="data/accidents.csv"):
     # Map the road class (The rank)
     df["road_class_name"] = df["first_road_class"].map(road_class_labels)
 
-    # Create the smart label - combining class and type of road.
+    
     def identify_road(row):
+        """Create the smart label - combining class and type of road."""
+
         if row["road_class_name"] == "Motorway":
             # This turns Dual Carriageway into Motorway(Dual Carriageway)
             return "Motorway(Motorway)"

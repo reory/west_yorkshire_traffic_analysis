@@ -46,6 +46,7 @@ def analyse_speed_limit_distribution(df):
 
 def run_infrastructure_suite(df):
     """Executes the full infrastructure analysis."""
+
     analyse_road_type_distribution(df)
     analyse_speed_limit_distribution(df)
     analyse_urban_rural_proportion(df)

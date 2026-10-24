@@ -55,6 +55,7 @@ def analyse_severity_by_district(df):
 
 def run_geographical_suite(df):
     """Execute the geographical analysis."""
+
     #analyse_overall_severity(df)
     analyse_severity_by_district(df)
     

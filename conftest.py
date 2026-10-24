@@ -12,6 +12,7 @@ def sample_traffic_data():
     Instead of recreating mock data in test_charts.py and test_temporal.py,
     you can just pass 'sample_traffic_data' as an argument to any test function.
     """
+
     return [
         {"location": "Leeds Center", "blackspot": True, "accidents": 12, "year": 2023},
         {"location": "Wakefield Road", "blackspot": False, "accidents": 2, "year": 2023},

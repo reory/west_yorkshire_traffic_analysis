@@ -13,3 +13,4 @@ streamlit/
 .pytest_cache/
 htmlcov/
 .ruff_cache/
+project_notes.txt

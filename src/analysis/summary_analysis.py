@@ -9,6 +9,7 @@ def run_comprehensive_summary(df, vehicles_df):
     Processes 1,613 records to find high-risk patterns from all three CSV files.
     Returns a list for PDF generation.
     """
+
     total_accidents = len(df)
     report_lines = [] # Stores data for the generated PDF.
 
