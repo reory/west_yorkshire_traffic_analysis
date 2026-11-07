@@ -103,6 +103,12 @@ To run this project locally:
 
 ---
 
+## 🛣️ Roadmap Features
+
+- Unified Mapping Engine – Replace hard-coded Folium settings with shared map configuration constants to simplify maintenance and future tile-provider migrations.
+
+---
+
 ## ⚖️ License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 

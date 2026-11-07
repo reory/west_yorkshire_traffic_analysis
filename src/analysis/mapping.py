@@ -24,6 +24,7 @@ def get_address(lat, lon):
         return "Area Lookup Failed"
     return "Unknown Location"
 
+
 def generate_severity_map(df, blackspots=None, output_path="collision_map.html"):
     """Creates an interactive cluster map of collisons."""
 
@@ -31,7 +32,7 @@ def generate_severity_map(df, blackspots=None, output_path="collision_map.html")
     m = folium.Map(
         location=[53.8008,-1.5491],
         zoom_start=10,
-        tiles="cartodbpositron"
+        tiles="OpenStreetMap"
     )
 
     # Initialize the cluster group.

@@ -13,7 +13,11 @@ def render_incident_map(display_df, cas_df, veh_df, show_blackspots, ui_mappings
     """
 
     # Create the base map centered on West Yorkshire
-    m = folium.Map(location=[53.8008, -1.5491], zoom_start=10, tiles="CartoDB positron")
+    m = folium.Map(
+        location=[53.8008, -1.5491], 
+        zoom_start=10, 
+        tiles="OpenStreetMap"
+    )
 
     if display_df.empty:
         return m
