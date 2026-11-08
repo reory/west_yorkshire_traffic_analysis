@@ -6,7 +6,14 @@ from folium.plugins import HeatMap, MarkerCluster
 
 logger = logging.getLogger(__name__)
 
-def render_incident_map(display_df, cas_df, veh_df, show_blackspots, ui_mappings):
+def render_incident_map(
+    display_df, 
+    cas_df, 
+    veh_df, 
+    show_markers,
+    show_heatmap, 
+    ui_mappings
+):
     """
     Handles all map rendering logic, including markers and heatmap overlays.
     'mappings' should be a dictionary containing all your label dictionaries.
@@ -26,7 +33,7 @@ def render_incident_map(display_df, cas_df, veh_df, show_blackspots, ui_mappings
     cas_indexed = cas_df.set_index("collision_index")
 
     # 1. Add Heatmap Layer (if toggled)
-    if show_blackspots:
+    if show_heatmap:
         heat_data = display_df[["latitude", "longitude"]].values.tolist()
         HeatMap(
             heat_data,
@@ -36,8 +43,10 @@ def render_incident_map(display_df, cas_df, veh_df, show_blackspots, ui_mappings
             gradient={0.4: "blue", 0.65: "lime", 1: "red"},
         ).add_to(m)
 
-    # 2. Add Marker Cluster Layer
-    marker_cluster = MarkerCluster().add_to(m)
+    # 2. Add Marker Cluster Layer (optional)
+    marker_cluster = None
+    if show_markers:
+        marker_cluster = MarkerCluster().add_to(m)
 
     def get_marker_colour(severity_code):
         """Return the marker colour associated with the given severity code."""
@@ -127,15 +136,17 @@ def render_incident_map(display_df, cas_df, veh_df, show_blackspots, ui_mappings
 
         color = get_marker_colour(row["collision_severity"])
 
-        folium.CircleMarker(
-            location=[row["latitude"], row["longitude"]],
-            radius=5,
-            color=color,
-            fill=True,
-            fill_color=color,
-            fill_opacity=0.8,
-            popup=folium.Popup(popup_text, max_width=400),
-            tooltip="Click for details",
-        ).add_to(marker_cluster)
+        # Only add markers when enabled
+        if show_markers:
+            folium.CircleMarker(
+                location=[row["latitude"], row["longitude"]],
+                radius=5,
+                color=color,
+                fill=True,
+                fill_color=color,
+                fill_opacity=0.8,
+                popup=folium.Popup(popup_text, max_width=400),
+                tooltip="Click for details",
+            ).add_to(marker_cluster)
 
     return m

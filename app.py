@@ -57,7 +57,8 @@ selected_year = filters['year']
 severity_choice = filters['severity']
 selected_genders = filters['genders']
 weather_choice = filters['weather']
-show_blackspots = filters['show_blackspots']
+show_markers = filters['show_markers']
+show_heatmap = filters['show_heatmap']
 
 # --- DATA PROCESSING ---
 # 1. Get initial data for the year
@@ -127,7 +128,14 @@ if display_df.empty:
 else:
 
  # Call the Artist (from map_utils.py)
- m = render_incident_map(display_df, cas_df, veh_df, show_blackspots,ui_mappings)
+ m = render_incident_map(
+    display_df, 
+    cas_df, 
+    veh_df,
+    show_markers, 
+    show_heatmap,
+    ui_mappings
+)
  st_folium(m, width=1400, height=700, returned_objects=[])
 
 # Row: Metrics
