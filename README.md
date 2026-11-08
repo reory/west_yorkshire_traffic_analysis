@@ -193,9 +193,6 @@ The "Analytical Backend." This script handles the heavy lifting of data visualis
 west_yorkshire_traffic_analysis/
 ├── app.py                 # Streamlit dashboard
 ├── main.py                # Backend script/Chart generation and PDF generation
-├── filters.py             # Dashboard filtering logic
-├── map_utils.py           # Geospatial mapping utilities
-├── sidebars.py            # Sidebar filters and returns the user's selections.
 ├── screenshots/           # Images of charts/Streamlit UI
 ├── data/                  # CSV data files
 ├── src/
@@ -210,10 +207,12 @@ west_yorkshire_traffic_analysis/
 |   |       ├── summary_analysis.py
 |   |       └── temporal.py               
 |   |       
-|   |
-│   ├── charts.py          # Chart generation functions
-|   ├── mapping.py         # Mapping dictionary
-│   └── load_data.py       # Data loading and preprocessing
+|   ├── map_utils.py      # Geospatial mapping utilities
+|   ├── filters.py        # Dashboard filtering logic
+|   ├── sidebars.py       # Sidebar filters and returns the user's selections.
+│   ├── charts.py         # Chart generation functions
+|   ├── mapping.py        # Mapping dictionary
+│   └── load_data.py      # Data loading and preprocessing
 |
 ├── tests/                 # Pytest suite
 ├── .gitignore
