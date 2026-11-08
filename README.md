@@ -131,6 +131,14 @@ Using publicly available Department for Transport data, I focused on West Yorksh
 
 ![screenshots](screenshots/sidebar1.png)
 
+### 🗺️ Interactive Map Layers
+
+- Incident Markers provide access to detailed collision information through interactive map popups.
+![screenshots](screenshots/incidents.png)
+
+- Heatmap Overlay highlights areas of high incident density.
+![screenshots](screenshots/heatmaps%20and%20incidents.png)
+
 ---
 
 ## 🔍 Geospatial Analysis & Mapping

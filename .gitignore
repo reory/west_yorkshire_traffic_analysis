@@ -1,5 +1,6 @@
 # Environment & Virtual Machine
 venv/
+/venv/
 .env
 .coverage
 
