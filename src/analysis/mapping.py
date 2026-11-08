@@ -28,7 +28,7 @@ def get_address(lat, lon):
 def generate_severity_map(df, blackspots=None, output_path="collision_map.html"):
     """Creates an interactive cluster map of collisons."""
 
-    # Initialize the map centered on Leeds area.
+    # Initialise the map centered on Leeds area.
     m = folium.Map(
         location=[53.8008,-1.5491],
         zoom_start=10,

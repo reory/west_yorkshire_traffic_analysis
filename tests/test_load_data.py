@@ -44,8 +44,8 @@ def test_load_linked_data_unexpected_exception_propagates():
 
 def test_load_wy_data_full_cleaning():
     df_mock = pd.DataFrame(
-        {
-            "date": ["2023-01-01", "bad-date"],
+        {   # Use DfT-style UK dates to match production data.
+            "date": ["01/01/2023", "bad-date"],
             "time": ["12:30", "bad"],
             "latitude": [53.8, None],
             "longitude": [-1.5, -1.6],
@@ -62,6 +62,8 @@ def test_load_wy_data_full_cleaning():
         patch("src.load_data.district_names", ["E08000035"]),
     ):
         result = load_wy_data("fake.csv")
+
+        print(result)
 
         # Only the first row survives (valid date + lat/lon + district)
         assert len(result) == 1

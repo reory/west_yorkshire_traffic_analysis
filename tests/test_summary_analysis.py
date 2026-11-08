@@ -33,7 +33,7 @@ def test_run_comprehensive_summary_basic():
         result = run_comprehensive_summary(df, vehicles_df)
 
         # Validate key lines
-        assert "TOTAL DATASET: 3 records analyzed." in result[0]
+        assert "TOTAL DATASET: 3 records analysed." in result[0]
         assert "MOTORWAY SCOPE: 1 incidents (33.3% of total)." in result[1]
         assert "Primary Driver Gender: Male" in result[4]
         assert "Most Frequent Vehicle: BMW" in result[5]

@@ -4,7 +4,7 @@ from src.analysis.blackspots import identify_blackspots
 
 
 def test_identify_blackspots_logic():
-    """Test if the analyzer correctly counts and ranks accident sites."""
+    """Test if the analyser correctly counts and ranks accident sites."""
 
     # Create the fake data to test.
     # 3 accidents at site A, 1 at site B.

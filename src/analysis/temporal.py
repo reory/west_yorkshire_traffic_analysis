@@ -43,7 +43,7 @@ def analyse_weekday_distribution(df):
 
 # 4C — Collisions by Month
 def analyse_month_distribution(df):
-    """Analyzes seasonal trends across the year."""
+    """Analyses seasonal trends across the year."""
 
     # Sort index keeps months in order (1-12)
     month_counts = df["month"].value_counts().sort_index()

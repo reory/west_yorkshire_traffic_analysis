@@ -8,11 +8,11 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import streamlit as st
 from streamlit_folium import st_folium
 
-import sidebars
-from filters import apply_filters
-from map_utils import render_incident_map
+from src.filters import apply_filters
 from src.load_data import load_linked_data, load_wy_data
+from src.map_utils import render_incident_map
 from src.mappings import ui_mappings
+from src.sidebars import render_sidebar
 
 
 def reset_all_filters():
@@ -44,13 +44,13 @@ def get_linked_assets(ids):
     # Ensure paths are relative to the project root
     veh = load_linked_data('data/vehicles.csv', ids)
     cas = load_linked_data("data/casualties.csv", ids)
-    print("--- Casualty Columns ---")
-    print(cas.columns.tolist())
+    #print("--- Casualty Columns ---")
+    #print(cas.columns.tolist())
     return veh, cas
 
 df = get_data()
 
-filters = sidebars.render_sidebar(df, ui_mappings)
+filters = render_sidebar(df, ui_mappings)
 
 # Filters dict from sidebars.py
 selected_year = filters['year']
@@ -123,7 +123,7 @@ st.subheader(f'Interactive Incident Map: {selected_year}🚦')
 
 if display_df.empty:
     st.info("💡**Getting Started:**"
-            " Please select filters from the sidebar to visualize data.")
+            " Please select filters from the sidebar to visualise data.")
 else:
 
  # Call the Artist (from map_utils.py)

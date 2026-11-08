@@ -4,7 +4,7 @@ from src.mappings import light_labels, special_labels, surface_labels, weather_l
 #print(silence debugging prints, turn on when ready)
 
 def analyse_weather_distribution(df):
-    """Analyzes collisions based on weather (Rain, Snow, Icy, etc)"""
+    """Analyses collisions based on weather (Rain, Snow, Icy, etc)"""
 
     df_local = df.copy()
     df_local["weather_label"] = df_local["weather_conditions"].map(weather_labels)
@@ -36,7 +36,7 @@ def analyse_light_condtions(df):
 
 # Collisions by Road Surface Conditions
 def analyse_road_surface(df):
-    """Analyzes if the road was Dry, Wet or Icy."""
+    """Analyses if the road was Dry, Wet or Icy."""
 
     surface_data = df["road_surface_conditions"].map(surface_labels)
     surface_counts = surface_data.value_counts()

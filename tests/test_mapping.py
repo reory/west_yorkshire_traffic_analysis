@@ -78,7 +78,7 @@ def test_generate_severity_map_basic():
         mock_web.assert_called_once()
 
 
-def test_generate_severity_map_motorway_pin_color():
+def test_generate_severity_map_motorway_pin_colour():
     df = pd.DataFrame(
         {
             "latitude": [53.8],

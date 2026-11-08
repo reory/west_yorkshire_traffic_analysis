@@ -39,7 +39,7 @@ def render_incident_map(display_df, cas_df, veh_df, show_blackspots, ui_mappings
     # 2. Add Marker Cluster Layer
     marker_cluster = MarkerCluster().add_to(m)
 
-    def get_marker_color(severity_code):
+    def get_marker_colour(severity_code):
         """Return the marker colour associated with the given severity code."""
 
         if severity_code == 1:
@@ -125,7 +125,7 @@ def render_incident_map(display_df, cas_df, veh_df, show_blackspots, ui_mappings
         </div>
         """
 
-        color = get_marker_color(row["collision_severity"])
+        color = get_marker_colour(row["collision_severity"])
 
         folium.CircleMarker(
             location=[row["latitude"], row["longitude"]],

@@ -50,7 +50,7 @@ def run_comprehensive_summary(df, vehicles_df):
             top_vehicle_text = valid_v["generic_make_model"].mode()[0]
 
     # Collect the data for the PDF.
-    report_lines.append(f"TOTAL DATASET: {total_accidents} records analyzed.")
+    report_lines.append(f"TOTAL DATASET: {total_accidents} records analysed.")
     report_lines.append(f"MOTORWAY SCOPE: {motorway_count} incidents ({motorway_pct:.1f}% of total).")
     report_lines.append("") # Space in the PDF document.
     report_lines.append("PROFILED RISK GROUPS:")
@@ -87,7 +87,7 @@ def run_comprehensive_summary(df, vehicles_df):
 
 
     #BELOW BLOCK OF CODE NOT NEEDED - LEFT FOR FUTURE WORKS.
-    # print(f"TOTAL DATASET: {total_accidents} records analyzed.")
+    # print(f"TOTAL DATASET: {total_accidents} records analysed.")
     # print(
     #     f"MOTORWAY SCOPE: {motorway_count} incidents" 
     #     f"({(motorway_count/total_accidents)*100:.1f}% of total)."

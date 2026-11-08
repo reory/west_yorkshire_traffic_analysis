@@ -3,7 +3,7 @@ from src.mappings import urban_rural_labels
 
 
 def analyse_road_type_distribution(df):
-    """Analyzes collisions by road layout (Roundabouts, Single carriageways, etc)"""
+    """Analyses collisions by road layout (Roundabouts, Single carriageways, etc)"""
 
     counts = df["display_road_type"].value_counts()
 
@@ -32,7 +32,7 @@ def analyse_urban_rural_proportion(df):
     )
 
 def analyse_speed_limit_distribution(df):
-    """Visualizes the frequency of collisions at different speed limits."""
+    """Visualises the frequency of collisions at different speed limits."""
     
     counts = df["speed_limit"].value_counts().sort_index()
 

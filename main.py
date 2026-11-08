@@ -40,7 +40,7 @@ def main():
 
     # Get the duration.
     data_duration = get_data_period(df)
-    #print(f"Analyzing data from: {data_duration}")
+    #print(f"Analysing data from: {data_duration}")
 
     # This now returns a list of dictionaries.
     hotspots = identify_blackspots(df, top_n=5)

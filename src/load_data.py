@@ -14,11 +14,11 @@ def load_linked_data(filepath, target_indices, index_col="collision_index"):
     """
     # print(f"Loading and linking {filepath}...")
 
-    # Optimize: Only load relevant columns if file is huge.
+    # Optimise: Only load relevant columns if file is huge.
     try:
         df = pd.read_csv(filepath, low_memory=False)
 
-        # Standardize the index name if needed.
+        # Standardise the index name if needed.
         if index_col not in df.columns and "accident_index" in df.columns:
             df = df.rename(columns={"accident_index": index_col})
 
@@ -47,8 +47,12 @@ def load_wy_data(path="data/accidents.csv"):
         logger.exception(f"Failed to load primary dataset from {path}")
         raise
 
-    # Extract useful components from the date.
-    df["date"] = pd.to_datetime(df["date"], errors="coerce")
+    # DfT datasets use UK day/month/year dates.
+    df["date"] = pd.to_datetime(
+        df["date"],
+        format="%d/%m/%Y", 
+        errors="coerce"
+    )
 
     # This removes any row where the date couldn't be parsed (NAT ones)
     df = df.dropna(subset=["date"]).copy()

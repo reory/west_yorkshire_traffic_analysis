@@ -20,7 +20,7 @@ plt.style.use("grayscale")
 def bar_chart(series, title, xlabel, ylabel, color=None):
     """
     Create and display a bar chart from the
-    given data series with labels and optional color.
+    given data series with labels and optional colour.
     """
 
     plt.figure(figsize=(12, 16))
@@ -159,7 +159,7 @@ def generate_blackspots_chart(
     plt.figtext(
         0.5,
         0.01,
-        f"Anaylsis Period: {data_duration} | Coordinates listed in full report.",
+        f"Analysis Period: {data_duration} | Coordinates listed in full report.",
         ha="center",
         fontsize=12,
         style="italic",
