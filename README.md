@@ -318,6 +318,7 @@ pytest
 ## 🛣️ Roadmap Features
 
 - [x] Interactive Map Layers
+- [ ] Streamlit PDF generation
 - [ ] District Comparison Dashboard
 - [ ] Comparative Year Analysis
 - [ ] Automated Hotspot Detection
