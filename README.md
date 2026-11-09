@@ -18,6 +18,13 @@
   <!-- App Framework -->
   <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" />
 
+  <!-- Testing Coverage -->
+  <img src="https://img.shields.io/badge/Tested%20with-Pytest-0A9EDC" />
+  <img src="https://img.shields.io/badge/Coverage-80%25-green" />
+
+  <!-- Linting -->
+  <img src="https://img.shields.io/badge/Linting-Ruff-D7FF64" />
+
 </p>
 
 An interactive intelligence dashboard and automated reporting tool built to analyse road safety data across West Yorkshire. This project transforms raw government datasets into actionable insights using a modern Python stack.
