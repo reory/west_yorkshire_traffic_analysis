@@ -3,7 +3,7 @@ from src.mappings import gender_options, light_labels, severity_labels, weather_
 
 #print(silence debugging prints, turn on when ready)
 
-def run_comprehensive_summary(df, vehicles_df):
+def run_comprehensive_summary(df, vehicles_df, chart_folder="output_charts"):
     """
     Acts as the master analysis engine.
     Processes 1,613 records to find high-risk patterns from all three CSV files.
@@ -50,22 +50,23 @@ def run_comprehensive_summary(df, vehicles_df):
             top_vehicle_text = valid_v["generic_make_model"].mode()[0]
 
     # Collect the data for the PDF.
+    report_lines.append(f"REGIONAL HAZARD SCORE: {hazard_score:.1f}%")
     report_lines.append(f"TOTAL DATASET: {total_accidents} records analysed.")
-    report_lines.append(f"MOTORWAY SCOPE: {motorway_count} incidents ({motorway_pct:.1f}% of total).")
+    report_lines.append(f"MOTORWAY INCIDENTS: {motorway_count} incidents ({motorway_pct:.1f}% of total).")
     report_lines.append("") # Space in the PDF document.
     report_lines.append("PROFILED RISK GROUPS:")
-    report_lines.append(f" - Primary Driver Gender: {top_gender_text}")
-    report_lines.append(f" - Most Frequent Vehicle: {top_vehicle_text}")
+    report_lines.append(f" - Predominant Driver Gender: {top_gender_text}")
+    report_lines.append(f" - Most Common Vehicle Model: {top_vehicle_text}")
     report_lines.append("") 
     report_lines.append("ENVIRONMENTAL PROFILE:")
     report_lines.append(f" - Predominant Weather: {weather_labels.get(top_weather, top_weather)}")
     report_lines.append(f" - Predominant Lighting: {light_labels.get(top_light, top_light)}")
     report_lines.append("")
-    report_lines.append("SEVERITY RISK:")
+    report_lines.append("SEVERITY PROFILE:")
     for sev, count in severity_counts.items():
         report_lines.append(f" - {sev}: {count}")
     report_lines.append("")
-    report_lines.append(f"REGIONAL HAZARD SCORE: {hazard_score:.1f}%")
+    
 
 
     # Generate the Final Report
@@ -81,6 +82,7 @@ def run_comprehensive_summary(df, vehicles_df):
         "Collision Severity Distribution West Yorkshire",
         pctdistance=0.7,
         colors=["#fa0202", "#fd7906", "#F9F906"],
+        chart_folder=chart_folder,
     )
 
     return report_lines

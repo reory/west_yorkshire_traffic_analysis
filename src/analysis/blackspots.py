@@ -6,10 +6,11 @@ def identify_blackspots(df, top_n=10, min_accidents=2):
     """Uses NumPy, Pandas and Geocoder to identify 
     high-frequency accident locations."""
 
-    # Round coordinates to 3 decimal places (~111m precision)
-    # This ensures that accidents at the same junction are grouped together.
-    lats = np.round(df["latitude"].to_numpy(), 3)
-    lons = np.round(df["longitude"].to_numpy(), 3)
+    # Round coordinates to 2 decimal places (~1km precision)
+    # This creates broader geographical clusters and highlights
+    # recurring accident locations within the same local area.
+    lats = np.round(df["latitude"].to_numpy(), 2)
+    lons = np.round(df["longitude"].to_numpy(), 2)
 
     # Use numpy to find unique coordinate pairs and their counts.
     coords = np.column_stack((lats, lons))
@@ -40,8 +41,8 @@ def identify_blackspots(df, top_n=10, min_accidents=2):
         area_name = results[0]['admin2']
         
         # Get the most common road type at this specific spot for context.
-        mask = (np.round(df["latitude"], 3) == lat) & (
-            np.round(df["longitude"], 3) == lon)
+        mask = (np.round(df["latitude"], 2) == lat) & (
+            np.round(df["longitude"], 2) == lon)
         
         road_info = df[mask][
             "display_road_type"
@@ -49,23 +50,24 @@ def identify_blackspots(df, top_n=10, min_accidents=2):
         
         # Create a label for the chart. 
         # This is a specific spot (site) at these coordinates.
-        site_label = f"Site @ {lat}, {lon} ({area_name})"
+        site_label = area_name
 
         # Build a dictionary
-        blackspots_results.append({
-            "latitude": lat,
-            "longitude": lon,
-            "area": area_name,
-            "site_label": site_label,
-            "count": int(current_count),
-            "road_type": road_info
-        })
+        blackspots_results.append(
+            {
+                "latitude": lat,
+                "longitude": lon,
+                "area": area_name,
+                "site_label": site_label,
+                "count": int(current_count),
+                "road_type": road_info,
+            }
+        )
     
-    final_filtered_results = [
-        spot for spot in blackspots_results 
-        if spot['count'] >= min_accidents
+    return [
+        spot
+        for spot in blackspots_results
+        if spot["count"] >= min_accidents
     ]
-
-    return final_filtered_results
 
     

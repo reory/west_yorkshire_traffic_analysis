@@ -17,7 +17,7 @@ if not os.path.exists("output_charts"):
 plt.style.use("grayscale")
 
 
-def bar_chart(series, title, xlabel, ylabel, color=None):
+def bar_chart(series, title, xlabel, ylabel, color=None, chart_folder="output_charts"):
     """
     Create and display a bar chart from the
     given data series with labels and optional colour.
@@ -35,14 +35,21 @@ def bar_chart(series, title, xlabel, ylabel, color=None):
     # Save charts insted of plt.show(). plt.show() causes weird behaviour.
     clean_title = title.replace(" ", "_").replace("(", "").replace(")", "") + ".png"
     filename = f"{clean_title}"
-    save_path = os.path.join("output_charts", filename)
+    save_path = os.path.join(chart_folder, filename)
     plt.savefig(save_path)
     # Important closes the plot memory so the script keeps moving.
     plt.close()
     # print(f"Chart saved: {save_path}")
 
 
-def stacked_bar_chart(df_comparison, title, xlabel, ylabel, colors):
+def stacked_bar_chart(
+    df_comparison, 
+    title, 
+    xlabel, 
+    ylabel, 
+    colors, 
+    chart_folder="output_charts"
+):
     """
     Create and display a stacked bar chart from the comparison
     DataFrame using the given labels and colours.
@@ -60,11 +67,19 @@ def stacked_bar_chart(df_comparison, title, xlabel, ylabel, colors):
     plt.tight_layout()
 
     clean_title = title.replace(" ", "_") + ".png"
-    plt.savefig(f"output_charts/{clean_title}")
+    save_path = os.path.join(chart_folder, clean_title)
+    plt.savefig(save_path)
     plt.close()
 
 
-def pie_chart(series, title, colors=None, pctdistance=1.0, labeldistance=1.05):
+def pie_chart(
+    series, 
+    title, 
+    colors=None, 
+    pctdistance=1.0, 
+    labeldistance=1.05, 
+    chart_folder="output_charts"
+):
     """
     Create and display a pie chart from the given
     data series with optional colours and label spacing.
@@ -91,7 +106,7 @@ def pie_chart(series, title, colors=None, pctdistance=1.0, labeldistance=1.05):
 
     clean_title = title.replace(" ", "_").replace("(", "").replace(")", "") + ".png"
     filename = f"{clean_title}"
-    save_path = os.path.join("output_charts", filename)
+    save_path = os.path.join(chart_folder, filename)
     plt.savefig(save_path)
     # Important closes the plot memory so the script keeps moving.
     plt.close()

@@ -9,8 +9,9 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import streamlit as st
 from streamlit_folium import st_folium
 
+from src.analysis.report_service import build_report
 from src.filters import apply_filters
-from src.load_data import load_linked_data, load_wy_data
+from src.load_data import get_data_period, load_linked_data, load_wy_data
 from src.map_utils import render_incident_map
 from src.mappings import ui_mappings
 from src.sidebars import render_sidebar
@@ -149,3 +150,29 @@ if not display_df.empty:
     c1, c2 = st.columns(2)
     c1.metric('Total Vehicles', v_count)
     c2.metric('Total Casualties', c_count)
+
+# PDF Report Generation
+st.markdown("---")
+st.subheader("📝 Download Report")
+
+if not display_df.empty and st.button("📝 Generate PDF report"):
+
+    with st.spinner("Building Report...please wait!"):
+        duration = get_data_period(display_df)
+
+        print(f"REPORT RECORDS: {len(display_df)}")
+        pdf_path = build_report(
+            display_df,
+            veh_df,
+            duration,
+            chart_folder="temp_report",
+        )
+
+    with open(pdf_path, "rb") as pdf_file:
+
+        st.download_button(
+            label="⬇️ Download PDF report",
+            data=pdf_file.read(),
+            file_name="West_Yorkshire_Traffic_Analysis_Report.pdf",
+            mime="application/pdf"
+        )

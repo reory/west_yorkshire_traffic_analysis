@@ -3,8 +3,6 @@ from datetime import UTC, datetime
 
 from fpdf import FPDF
 
-now = datetime.now(UTC)
-timestamp = now.strftime("%d/%m/%Y %H:%M:%S")
 
 class WYTrafficReport(FPDF):
     """Generate a traffic report with all the findings."""
@@ -20,6 +18,10 @@ class WYTrafficReport(FPDF):
         self.cell(0, 10, f"Page {self.page_no()}", 0, 0, "C")
 
 def generate_pdf_report(summary_data, hotspots_list=None, chart_folder="output_charts"):
+    """Generate the PDF document with all the data."""
+
+    now = datetime.now(UTC)
+    timestamp = now.strftime("%d/%m/%Y %H:%M:%S")
 
     pdf = WYTrafficReport()
     pdf.set_auto_page_break(auto=True)
@@ -125,10 +127,13 @@ def generate_pdf_report(summary_data, hotspots_list=None, chart_folder="output_c
         pdf.ln(20)
         pdf.image(chart_path, x=20, w=170)
 
-    target_folder = "output_charts"
+    target_folder = chart_folder
+
     filename = "West_Yorkshire_Traffic_Analysis_Report.pdf"
 
     full_path = os.path.join(target_folder, filename)
 
     pdf.output(full_path)
     print(f"PDF REPORT GENERATED: {full_path}")
+
+    return full_path
