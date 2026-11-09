@@ -218,7 +218,8 @@ west_yorkshire_traffic_analysis/
 |   |       ├── geography.py
 |   |       ├── infrastructure.py                 
 |   |       ├── mapping.py             
-|   |       ├── report_generator.py           
+|   |       ├── report_generator.py
+|   |       ├── report_service.py     
 |   |       ├── summary_analysis.py
 |   |       └── temporal.py               
 |   |       
