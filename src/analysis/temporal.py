@@ -60,6 +60,7 @@ def analyse_month_distribution(df):
 def run_temporal_suite(df):
     """Executes the full time series analysis."""
 
+    # Analyse when collisions occur across hours, weekdays, and months.
     analyse_hour_distribution(df)
     analyse_weekday_distribution(df)
     analyse_month_distribution(df)

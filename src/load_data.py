@@ -107,6 +107,7 @@ def get_data_period(df):
     if df.empty or "date" not in df.columns:
         return "Unknown Period"
 
+    # Dataset date range used in charts, reports, and summaries
     start = df["date"].min().strftime("%d, %b, %Y")
     end = df["date"].max().strftime("%d, %b, %Y")
 

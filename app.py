@@ -1,4 +1,5 @@
-# Main streamlit script.
+"""Main streamlit script"""
+
 import os
 import sys
 

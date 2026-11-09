@@ -1,3 +1,10 @@
+"""
+Run the complete West Yorkshire traffic analysis workflow.
+
+Loads source datasets, executes all analysis modules, generates charts,
+identifies blackspots, creates interactive maps, and exports a PDF report.
+"""
+
 import matplotlib.pyplot as plt
 
 plt.style.use('grayscale')
