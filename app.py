@@ -1,20 +1,22 @@
 """Main streamlit script"""
 
-import os
-import sys
-
-# 1. PATH FIX: Tell Python to look one folder up for the 'src' directory
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 import streamlit as st
 from streamlit_folium import st_folium
 
 from src.analysis.report_service import build_report
+from src.data_sources import DATA_SOURCES
 from src.filters import apply_filters
-from src.load_data import get_data_period, load_linked_data, load_wy_data
+from src.load_data import (
+    get_data_period,
+    load_collision_years,
+    load_linked_data,
+)
 from src.map_utils import render_incident_map
 from src.mappings import ui_mappings
 from src.sidebars import render_sidebar
+
+# --- PAGE SETUP ---
+st.set_page_config(page_title='West Yorkshire Traffic Analysis', layout='wide')
 
 
 def reset_all_filters():
@@ -30,22 +32,23 @@ def reset_all_filters():
 if st.sidebar.button('🔃 Reset All Filters'):
     reset_all_filters()
 
-# --- PAGE SETUP ---
-st.set_page_config(page_title='West Yorkshire Traffic Analysis', layout='wide')
 
 @st.cache_data
 def get_data():
-    """Load and return accident data from the CSV file."""
+    """Load all configured collision datasets."""
 
-    return load_wy_data('data/accidents.csv')
+    return load_collision_years()
+
 
 @st.cache_data
-def get_linked_assets(ids):
-    """Load and return linked vehicle and casualty data for the specified IDs."""
+def get_linked_assets(year, ids):
+    """Load linked vehicle and casualty data for the selected year."""
+
+    source = DATA_SOURCES[year]
 
     # Ensure paths are relative to the project root
-    veh = load_linked_data('data/vehicles.csv', ids)
-    cas = load_linked_data("data/casualties.csv", ids)
+    veh = load_linked_data(source["vehicles"], ids)
+    cas = load_linked_data(source["casualties"], ids)
     #print("--- Casualty Columns ---")
     #print(cas.columns.tolist())
     return veh, cas
@@ -65,9 +68,14 @@ show_heatmap = filters['show_heatmap']
 # --- DATA PROCESSING ---
 # 1. Get initial data for the year
 filtered_df = df[df['year'] == selected_year].copy()
+
 target_ids = filtered_df['collision_index']
-veh_df, cas_df = get_linked_assets(target_ids)
-#-----------------------------------------------------------------------
+
+veh_df, cas_df = get_linked_assets(
+    selected_year, 
+    target_ids.tolist(),
+)
+
 # 2. Apply complex filters (from filters.py)
 filtered_df = apply_filters(
     df=filtered_df, 
@@ -98,8 +106,8 @@ if not any(active_filters):
     display_df = filtered_df.iloc[0:0]
 else:
     display_df = filtered_df
-#---------------------------------------------------------------
-# --- MAIN DASHBOARD ---
+
+# Main Dashboard -------------------------------------------------
 st.title('West Yorkshire Traffic Analysis:🚦')
 st.subheader(f'Insights and Hotspots for {selected_year}')
 st.markdown('---')
@@ -117,11 +125,11 @@ with col2:
         st.metric('Most Common Severity', 'N/A')
 with col3:
     if not display_df.empty:
-        top_dist = display_df['local_authority_district'].mode()[0]
+        top_dist = display_df['local_authority_ons_district'].mode()[0]
         label = ui_mappings['district'].get(top_dist, 'West Yorkshire')
         st.metric('District', label)
 
-# Row: The Map
+# Row: The Map--------------------------------------------------------
 st.subheader(f'Interactive Incident Map: {selected_year}🚦')
 
 if display_df.empty:
@@ -140,7 +148,7 @@ else:
 )
  st_folium(m, width=1400, height=700, returned_objects=[])
 
-# Row: Metrics
+# Row: Metrics--------------------------------------------------------
 st.write('### 📊 Snapshot of the Involved Incidents')
 if not display_df.empty:
     final_ids = display_df['collision_index']
@@ -151,7 +159,7 @@ if not display_df.empty:
     c1.metric('Total Vehicles', v_count)
     c2.metric('Total Casualties', c_count)
 
-# PDF Report Generation
+# PDF Report Generation----------------------------------------------
 st.markdown("---")
 st.subheader("📝 Download Report")
 
@@ -159,17 +167,29 @@ if not display_df.empty and st.button("📝 Generate PDF report"):
 
     with st.spinner("Building Report...please wait!"):
         duration = get_data_period(display_df)
+        
+        report_ids = display_df["collision_index"]
 
-        print(f"REPORT RECORDS: {len(display_df)}")
+        report_vehicles_df = veh_df[
+            veh_df["collision_index"].isin(report_ids)
+        ].copy()
+
+        report_casualties_df = cas_df[
+            cas_df["collision_index"].isin(report_ids)
+        ].copy()
+
+        # Build Filtered PDF Report
         pdf_path = build_report(
             display_df,
-            veh_df,
+            report_vehicles_df,
+            report_casualties_df,
             duration,
             chart_folder="temp_report",
         )
 
     with open(pdf_path, "rb") as pdf_file:
 
+        # PDF Download Button
         st.download_button(
             label="⬇️ Download PDF report",
             data=pdf_file.read(),

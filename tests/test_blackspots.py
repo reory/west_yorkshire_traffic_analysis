@@ -29,3 +29,19 @@ def test_identify_blackspots_logic():
     assert (
         "latitude" in results[0]
     )  # Ensure the keys needed for the map/pdf exists.
+
+
+def test_identify_blackspots_handles_missing_coordinates():
+    """Rows with missing coordinates should not raise errors."""
+
+    df = pd.DataFrame(
+        {
+            "latitude": [None],
+            "longitude": [None],
+            "display_road_type": ["Unknown"],
+        }
+    )
+
+    result = identify_blackspots(df)
+
+    assert result == []

@@ -3,12 +3,12 @@ from src.mappings import light_labels, special_labels, surface_labels, weather_l
 
 #print(silence debugging prints, turn on when ready)
 
-def analyse_weather_distribution(df):
+def analyse_weather_distribution(df, chart_folder="output_charts"):
     """Analyses collisions based on weather (Rain, Snow, Icy, etc)"""
 
+    # Prepare weather condition data
     df_local = df.copy()
     df_local["weather_label"] = df_local["weather_conditions"].map(weather_labels)
-
     counts = df_local["weather_label"].value_counts()
 
     bar_chart(
@@ -16,13 +16,15 @@ def analyse_weather_distribution(df):
         "Collisions by Weather Condition (West Yorkshire)",
         "Weather Condition",
         "Number of Collisions",
-        color="#9b9030ff"
+        color="#9b9030ff",
+        chart_folder=chart_folder,
     )
 
-# Collisions by Light Conditions
-def analyse_light_condtions(df):
+
+def analyse_light_conditions(df, chart_folder="output_charts"):
     """Analyse conditions based on Daylight vs Darkness."""
 
+    # Count lighting conditions frequencies
     light_data = df["light_conditions"].map(light_labels)
     light_counts = light_data.value_counts()
 
@@ -31,13 +33,15 @@ def analyse_light_condtions(df):
         "Collisions by Light Conditions (West Yorkshire)",
         "Light Condition",
         "Number of Collisions",
-        color="slateblue"
+        color="slateblue",
+        chart_folder=chart_folder,
     )
 
-# Collisions by Road Surface Conditions
-def analyse_road_surface(df):
+
+def analyse_road_surface(df, chart_folder="output_charts"):
     """Analyses if the road was Dry, Wet or Icy."""
 
+    # Calculate surface condition frequencies
     surface_data = df["road_surface_conditions"].map(surface_labels)
     surface_counts = surface_data.value_counts()
 
@@ -46,13 +50,15 @@ def analyse_road_surface(df):
         "Collisions by Road Surface Conditions (West Yorkshire)",
         "Road Surface Condition",
         "Number of Collisions",
-        color="#F87A1A"
+        color="#F87A1A",
+        chart_folder=chart_folder,
     )
 
-# 4I — Special Conditions at Site
-def analyse_special_conditions(df):
+
+def analyse_special_conditions(df, chart_folder="output_charts"):
     """Highlights site hazards like Roadworks or Oil, excluding 'normal'"""
 
+    # Calculate special condition frequencies
     data = df["special_conditions_at_site"].map(special_labels)
     counts = data.value_counts()
 
@@ -69,13 +75,16 @@ def analyse_special_conditions(df):
         "Special hazards as site (Excluding normal conditions)",
         "Special Condition",
         "Number of Collisions",
-        color="#5b0bf0"
+        color="#5b0bf0",
+        chart_folder=chart_folder,
     )
 
-def run_environmental_suite(df):
+
+def run_environmental_suite(df, chart_folder="output_charts"):
     """Execute the environmental analysis."""
 
-    analyse_weather_distribution(df)
-    analyse_light_condtions(df)
-    analyse_road_surface(df)
-    analyse_special_conditions(df)
+    # Generate environmental analysis charts
+    analyse_weather_distribution(df, chart_folder=chart_folder)
+    analyse_light_conditions(df, chart_folder=chart_folder)
+    analyse_road_surface(df, chart_folder=chart_folder)
+    analyse_special_conditions(df, chart_folder=chart_folder)

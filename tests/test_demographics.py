@@ -6,6 +6,8 @@ from src.analysis.demographics import run_demographic_suite
 
 
 def test_driver_gender_distribution():
+    """Tests driver gender chart data."""
+
     vehicles_df = pd.DataFrame({"sex_of_driver": [1, 1, 2]})
     casualties_df = pd.DataFrame()
 
@@ -28,6 +30,8 @@ def test_driver_gender_distribution():
 
 
 def test_driver_age_band_distribution():
+    """Tests driver age band analysis."""
+
     vehicles_df = pd.DataFrame(
         {
             "age_band_of_driver": [1, 2, -1]  # -1 should be filtered out
@@ -57,6 +61,8 @@ def test_driver_age_band_distribution():
 
 
 def test_casualty_class_distribution():
+    """Tests casualty class breakdown."""
+
     vehicles_df = pd.DataFrame()
     casualties_df = pd.DataFrame({"casualty_class": [1, 2, 1]})
 
@@ -85,6 +91,8 @@ def test_casualty_class_distribution():
 
 
 def test_top_vehicle_makes():
+    """Tests top vehicle make analysis."""
+
     vehicles_df = pd.DataFrame(
         {"generic_make_model": ["Ford", "-1", "BMW", "Ford", -1]}
     )

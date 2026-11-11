@@ -7,6 +7,7 @@ from src.analysis.mapping import generate_severity_map, get_address
 
 
 def test_get_address_success():
+    """Tests successful area lookup."""
 
     with patch("src.analysis.mapping.rg.search") as mock_search:
         mock_search.return_value = [{"name": "Leeds"}]
@@ -16,6 +17,7 @@ def test_get_address_success():
 
 
 def test_get_address_empty_result():
+    """Tests empty lookup results."""
 
     with patch("src.analysis.mapping.rg.search") as mock_search:
         mock_search.return_value = []
@@ -25,6 +27,7 @@ def test_get_address_empty_result():
 
 
 def test_get_address_exception():
+    """Tests lookup failure handling."""
 
     with patch(
         "src.analysis.mapping.rg.search", side_effect=ValueError("bad_coordinates")):
@@ -33,6 +36,8 @@ def test_get_address_exception():
 
 
 def test_get_address_unexpected_exception_propagates():
+    """Tests unexpected exception propagation."""
+
     with (
         patch(
             "src.analysis.mapping.rg.search", 
@@ -44,6 +49,7 @@ def test_get_address_unexpected_exception_propagates():
 
 
 def test_generate_severity_map_basic():
+    """Tests basic map generation."""
 
     df = pd.DataFrame(
         {
@@ -66,7 +72,6 @@ def test_generate_severity_map_basic():
         patch("src.analysis.mapping.folium.Popup"),
         patch("src.analysis.mapping.folium.Icon"),
         patch("src.analysis.mapping.open", create=True) as mock_open,
-        patch("src.analysis.mapping.webbrowser.open") as mock_web,
     ):
         # Mock file read/write
         mock_open.return_value.__enter__.return_value.read.return_value = (
@@ -75,10 +80,11 @@ def test_generate_severity_map_basic():
         generate_severity_map(df, blackspots=None, output_path="test.html")
 
         mock_map.save.assert_called_once_with("test.html")
-        mock_web.assert_called_once()
 
 
 def test_generate_severity_map_motorway_pin_colour():
+    """Tests motorway marker styling."""
+
     df = pd.DataFrame(
         {
             "latitude": [53.8],
@@ -95,7 +101,6 @@ def test_generate_severity_map_motorway_pin_colour():
         patch("src.analysis.mapping.MarkerCluster"),
         patch("src.analysis.mapping.folium.Popup"),
         patch("src.analysis.mapping.open", create=True),
-        patch("src.analysis.mapping.webbrowser.open"),
         patch("src.analysis.mapping.folium.Icon") as mock_icon,
         patch("src.analysis.mapping.folium.Marker"),
     ):
@@ -106,6 +111,8 @@ def test_generate_severity_map_motorway_pin_colour():
 
 
 def test_generate_severity_map_blackspots():
+    """Tests blackspot marker creation."""
+
     df = pd.DataFrame(
         {
             "latitude": [53.8],
@@ -125,8 +132,37 @@ def test_generate_severity_map_blackspots():
         patch("src.analysis.mapping.folium.CircleMarker") as mock_circle,
         patch("src.analysis.mapping.get_address", return_value="Test Street"),
         patch("src.analysis.mapping.open", create=True),
-        patch("src.analysis.mapping.webbrowser.open"),
     ):
         generate_severity_map(df, blackspots=blackspots)
 
         mock_circle.assert_called()
+
+
+def test_generate_severity_map_injects_referrer_meta(tmp_path):
+    """Test referrer policy injection."""
+
+    df = pd.DataFrame(
+        {
+            "latitude": [53.8],
+            "longitude": [-1.4],
+            "collision_severity": [2],
+            "first_road_class": [4],
+            "date": ["2025-01-04"],
+            "display_road_type": ["A Road"],
+        }
+    )
+
+    output_path = tmp_path / "test_map.html"
+
+    generate_severity_map(
+        df,
+        blackspots=None,
+        output_path=output_path,
+    )
+
+    html= output_path.read_text(encoding="utf-8")
+
+    assert (
+        '<meta name="referrer" '
+        'content="strict-origin-when-cross-origin">'
+    ) in html

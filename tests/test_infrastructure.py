@@ -11,6 +11,8 @@ from src.analysis.infrastructure import (
 
 
 def test_analyse_road_type_distribution():
+    """Tests road type distribution."""
+
     df = pd.DataFrame({"display_road_type": ["A Road", "A Road", "Motorway"]})
 
     with patch("src.analysis.infrastructure.bar_chart") as mock_bar:
@@ -28,6 +30,8 @@ def test_analyse_road_type_distribution():
 
 
 def test_analyse_urban_rural_proportion():
+    """Tests urban and rural proportions."""
+
     df = pd.DataFrame({"urban_or_rural_area": [1, 2, 1]})
 
     with (
@@ -54,6 +58,8 @@ def test_analyse_urban_rural_proportion():
 
 
 def test_analyse_speed_limit_distribution():
+    """Tests speed limit distribution."""
+
     df = pd.DataFrame({"speed_limit": [30, 20, 30, 40]})
 
     with patch("src.analysis.infrastructure.bar_chart") as mock_bar:
@@ -71,6 +77,8 @@ def test_analyse_speed_limit_distribution():
 
 
 def test_run_infrastructure_suite():
+    """Tests infrastructure suite execution."""
+
     df = pd.DataFrame(
         {
             "display_road_type": ["A Road"],

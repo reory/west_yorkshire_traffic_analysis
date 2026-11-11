@@ -6,6 +6,7 @@ def analyse_hour_distribution(df):
 
     hour_counts = df["hour"].value_counts().sort_index()
 
+    # Generate hourly collision chart
     bar_chart(
         hour_counts,
         "Collisions by Hour of Day (West Yorkshire)",
@@ -41,13 +42,13 @@ def analyse_weekday_distribution(df):
     )
 
 
-# 4C — Collisions by Month
 def analyse_month_distribution(df):
     """Analyses seasonal trends across the year."""
 
     # Sort index keeps months in order (1-12)
     month_counts = df["month"].value_counts().sort_index()
 
+    # Generate monthly collision chart
     bar_chart(
         month_counts,
         "Collisions by Month (West Yorkshire)",

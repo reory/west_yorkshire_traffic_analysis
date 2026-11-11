@@ -25,6 +25,11 @@ def render_sidebar(df, ui_mappings):
         selected_genders = st.multiselect(
             "Casualty Gender",
             options=list(ui_mappings["gender"].values()),
+            help=(
+                "Shows collisions involving at least one casualty "
+                "from the selected gender group. Other casualties "
+                "in the same collision may also be displayed."
+            ),
             key="cas_filter",
         )
         age_choice = st.multiselect(

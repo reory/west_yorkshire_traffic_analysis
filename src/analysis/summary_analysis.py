@@ -3,15 +3,21 @@ from src.mappings import gender_options, light_labels, severity_labels, weather_
 
 #print(silence debugging prints, turn on when ready)
 
-def run_comprehensive_summary(df, vehicles_df, chart_folder="output_charts"):
+def run_comprehensive_summary(
+    df, 
+    vehicles_df, 
+    casualties_df,
+    chart_folder="output_charts"
+):
     """
-    Acts as the master analysis engine.
-    Processes 1,613 records to find high-risk patterns from all three CSV files.
-    Returns a list for PDF generation.
+    Generate summary statistics and supporting report content for the supplied
+    accident and vehicle datasets.
+
+    Returns a list of formatted report lines for PDF generation.
     """
 
     total_accidents = len(df)
-    report_lines = [] # Stores data for the generated PDF.
+    report_lines = []
 
     # Infrastructure Breakdown
     motorway_df = df[df["first_road_class"] == 1]
@@ -37,11 +43,12 @@ def run_comprehensive_summary(df, vehicles_df, chart_folder="output_charts"):
     top_gender_text = "Unknown"
     top_vehicle_text = "Unknown"
 
-    if not vehicles_df.empty:
+    if not casualties_df.empty:
 
-        # Get predominant gender
-        raw_gender = vehicles_df["sex_of_driver"].mode()[0]
+        raw_gender = casualties_df["sex_of_casualty"].mode()[0]
         top_gender_text = gender_options.get(raw_gender, "Unknown")
+
+    if not vehicles_df.empty:
 
         # Get top vehicle make.
         valid_v = vehicles_df[vehicles_df["generic_make_model"] != "-1"]
@@ -55,7 +62,7 @@ def run_comprehensive_summary(df, vehicles_df, chart_folder="output_charts"):
     report_lines.append(f"MOTORWAY INCIDENTS: {motorway_count} incidents ({motorway_pct:.1f}% of total).")
     report_lines.append("") # Space in the PDF document.
     report_lines.append("PROFILED RISK GROUPS:")
-    report_lines.append(f" - Predominant Driver Gender: {top_gender_text}")
+    report_lines.append(f" - Predominant Casualty Gender: {top_gender_text}")
     report_lines.append(f" - Most Common Vehicle Model: {top_vehicle_text}")
     report_lines.append("") 
     report_lines.append("ENVIRONMENTAL PROFILE:")
@@ -66,17 +73,8 @@ def run_comprehensive_summary(df, vehicles_df, chart_folder="output_charts"):
     for sev, count in severity_counts.items():
         report_lines.append(f" - {sev}: {count}")
     report_lines.append("")
-    
 
-
-    # Generate the Final Report
-    #print("\n" + "═" * 50)
-    #print("WEST YORKSHIRE TRAFFIC INTELLIGENCE REPORT")
-    #print("═" * 50)
-    for line in report_lines:
-        print(line)
-    #print("=" * 50 + "\n")
-
+    # Generate severity distribution chart
     pie_chart(
         severity_counts,
         "Collision Severity Distribution West Yorkshire",
@@ -88,7 +86,18 @@ def run_comprehensive_summary(df, vehicles_df, chart_folder="output_charts"):
     return report_lines
 
 
-    #BELOW BLOCK OF CODE NOT NEEDED - LEFT FOR FUTURE WORKS.
+#========================================================================
+    # Generate the Final Report
+    #print("\n" + "═" * 50)
+    #print("WEST YORKSHIRE TRAFFIC INTELLIGENCE REPORT")
+    #print("═" * 50)
+    #for line in report_lines:
+        #print(line)
+    #print("=" * 50 + "\n")
+#========================================================================
+
+#========================================================================
+    # Historical console reporting logic removed.
     # print(f"TOTAL DATASET: {total_accidents} records analysed.")
     # print(
     #     f"MOTORWAY SCOPE: {motorway_count} incidents" 
@@ -110,5 +119,5 @@ def run_comprehensive_summary(df, vehicles_df, chart_folder="output_charts"):
     # print(f"\nREGIONAL HAZARD SCORE: {hazard_score:.1f}%")
     # print(" (Percentage of total accidents resulting in Serious/Fatal outcomes)")
     # print("═" * 50 + "\n")
-
+#================================================================================
    

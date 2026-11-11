@@ -2,6 +2,7 @@ import logging
 
 import pandas as pd
 
+from src.data_sources import DATA_SOURCES
 from src.mappings import district_names, road_class_labels, road_type_labels
 
 logger = logging.getLogger(__name__)
@@ -38,8 +39,40 @@ def load_linked_data(filepath, target_indices, index_col="collision_index"):
         return pd.DataFrame()  # Return empty if it fails.
 
 
-def load_wy_data(path="data/accidents.csv"):
-    """Load the WY traffic data."""
+def load_collision_years(years: list[int] | None = None):
+    """Load and combine collision datasets for one or more years."""
+
+    if years is None:
+        years = sorted(DATA_SOURCES.keys())
+
+    frames = []
+
+    for year in years:
+        if year not in DATA_SOURCES:
+            raise ValueError(f"No data source configured for {year}")
+
+        collision_path = DATA_SOURCES[year]["accidents"]
+
+        frame = load_wy_data(collision_path)
+
+        frames.append(frame)
+
+    if not frames:
+        return pd.DataFrame()
+
+    return (
+        pd.concat(
+            frames, 
+            ignore_index=True, 
+            sort=False
+        )
+        .sort_values("date")
+        .reset_index(drop=True)
+    )
+
+
+def load_wy_data(path):
+    """Load and clean West Yorkshire collision data."""
     
     try:
         df = pd.read_csv(path, low_memory=False)

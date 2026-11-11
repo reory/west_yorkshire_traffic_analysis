@@ -11,6 +11,7 @@ from src.analysis.temporal import (
 
 
 def test_analyse_hour_distribution_calls_bar_chart():
+    """Tests hourly collision distribution."""
 
     df = pd.DataFrame({"hour": [1, 1, 2]})
 
@@ -31,6 +32,8 @@ def test_analyse_hour_distribution_calls_bar_chart():
 
 
 def test_analyse_weekday_distribution_calls_bar_chart():
+    """Tests weekday collision distribution."""
+
     df = pd.DataFrame({"day_name": ["Monday", "Wednesday", "Monday"]})
 
     with patch("src.analysis.temporal.bar_chart") as mock_chart:
@@ -58,6 +61,8 @@ def test_analyse_weekday_distribution_calls_bar_chart():
 
 
 def test_analyse_month_distribution_calls_bar_chart():
+    """Tests monthly collision distribution."""
+
     df = pd.DataFrame({"month": [1, 1, 3]})
 
     with patch("src.analysis.temporal.bar_chart") as mock_chart:
@@ -75,6 +80,8 @@ def test_analyse_month_distribution_calls_bar_chart():
 
 
 def test_run_temporal_suite_calls_all_three():
+    """Tests temporal suite execution."""
+
     df = pd.DataFrame({"hour": [1], "day_name": ["Monday"], "month": [1]})
 
     with (

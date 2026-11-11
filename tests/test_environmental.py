@@ -40,7 +40,7 @@ def test_analyse_light_conditions_calls_bar_chart(mocker):
         }
     )
 
-    environmental.analyse_light_condtions(df)
+    environmental.analyse_light_conditions(df)
 
     mock_chart.assert_called_once()
 
@@ -125,7 +125,7 @@ def test_run_environmental_suite_calls_all_analyses(mocker):
     )
 
     light = mocker.patch(
-        "src.analysis.environmental.analyse_light_condtions"
+        "src.analysis.environmental.analyse_light_conditions"
     )
 
     surface = mocker.patch(

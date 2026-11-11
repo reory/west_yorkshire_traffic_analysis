@@ -149,6 +149,7 @@ def generate_blackspots_chart(
     plt.yticks(y_pos, labels[::-1], fontsize=11)
     plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
 
+    # Add incident labels to bars
     for bar in bars:
         width = bar.get_width()
         plt.text(

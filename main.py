@@ -20,6 +20,7 @@ from src.analysis.infrastructure import run_infrastructure_suite
 from src.analysis.mapping import generate_severity_map
 from src.analysis.report_service import build_report
 from src.analysis.temporal import run_temporal_suite
+from src.data_sources import DATA_SOURCES
 from src.load_data import get_data_period, load_linked_data, load_wy_data
 
 plt.style.use("grayscale")
@@ -29,12 +30,18 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
 )
 
+# Change this value to run a different dataset year.
+ANALYSIS_YEAR = 2025
 
 def main():
     """Execute the complete West Yorkshire traffic analysis workflow."""
 
     try:
-        df = load_wy_data("data/accidents.csv")
+        source = DATA_SOURCES[ANALYSIS_YEAR]
+
+        df = load_wy_data(
+            source["accidents"]
+        )
     except (
         FileNotFoundError,
         pd.errors.ParserError,
@@ -56,15 +63,16 @@ def main():
     wy_indices = df["collision_index"].unique()
 
     vehicles_df = load_linked_data(
-        "data/vehicles.csv",
+        source["vehicles"],
         wy_indices,
     )
 
     casualties_df = load_linked_data(
-        "data/casualties.csv",
+        source["casualties"],
         wy_indices,
     )
 
+    print(f"Running analysis for {ANALYSIS_YEAR}")
     start_time = time.time()
 
     # Execute analysis suites and generate charts.
@@ -88,9 +96,11 @@ def main():
     build_report(
         df,
         vehicles_df,
+        casualties_df,
         data_duration,
     )
 
+    # Calculate processing time
     end_time = time.time()
     duration = round(end_time - start_time, 2)
 

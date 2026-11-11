@@ -3,22 +3,8 @@ import pandas as pd
 from src.charts import stacked_bar_chart
 from src.mappings import district_names, severity_labels
 
-#Below def method has already been taken care of.
-# Severity Distribution
-# def analyse_overall_severity(df):
-#     """General overview of how dangerous the accidents are across WY."""
-#     severity_data = df["collision_severity"].map(severity_labels)
-#     severity_counts = severity_data.value_counts()
 
-#     pie_chart(
-#         severity_counts,
-#         "Collision Severity Distribution (West Yorkshire)",
-#         colors=["#e74c3c", "#f39c12", "#f1c40f"],
-#         pctdistance=0.8,
-#         labeldistance=1.0
-#     )
-
-def analyse_severity_by_district(df):
+def analyse_severity_by_district(df, chart_folder="output_charts"):
     """
     Compares the accident count and severity levels across the
     5 West Yorkshire districts.
@@ -50,13 +36,31 @@ def analyse_severity_by_district(df):
         "Accident Severity Breakdown by West Yorkshire District",
         "District",
         "Number of Accidents",
-        ["#e74c3c", "#f39c12", "#f1c40f"]
+        ["#e74c3c", "#f39c12", "#f1c40f"],
+        chart_folder=chart_folder,
     )
 
-def run_geographical_suite(df):
+
+def run_geographical_suite(df, chart_folder="output_charts"):
     """Execute the geographical analysis."""
 
     #analyse_overall_severity(df)
-    analyse_severity_by_district(df)
-    
+    analyse_severity_by_district(df, chart_folder=chart_folder)
 
+
+#----------------------------------------------------------------
+#Below def method has already been taken care of.
+# Severity Distribution
+# def analyse_overall_severity(df):
+#     """General overview of how dangerous the accidents are across WY."""
+#     severity_data = df["collision_severity"].map(severity_labels)
+#     severity_counts = severity_data.value_counts()
+
+#     pie_chart(
+#         severity_counts,
+#         "Collision Severity Distribution (West Yorkshire)",
+#         colors=["#e74c3c", "#f39c12", "#f1c40f"],
+#         pctdistance=0.8,
+#         labeldistance=1.0
+#     )
+#-------------------------------------------------------------------

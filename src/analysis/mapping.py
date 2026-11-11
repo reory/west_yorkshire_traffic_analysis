@@ -1,6 +1,5 @@
 import logging
 import os
-import webbrowser
 
 import folium
 import reverse_geocoder as rg  # better than geopy to stop hitting apis.
@@ -19,14 +18,14 @@ def get_address(lat, lon):
         if results:
             area = results[0].get('name', 'Unknown Area')
             return area
-    except (ValueError, TypeError)as e:
+    except (ValueError, TypeError) as e:
         logger.warning(f"Area lookup failed for ({lat}, {lon}): {e!s}")
         return "Area Lookup Failed"
     return "Unknown Location"
 
 
 def generate_severity_map(df, blackspots=None, output_path="collision_map.html"):
-    """Creates an interactive cluster map of collisons."""
+    """Creates an interactive cluster map of collisions."""
 
     # Initialise the map centered on Leeds area.
     m = folium.Map(
@@ -158,20 +157,52 @@ def generate_severity_map(df, blackspots=None, output_path="collision_map.html")
     </div>
     '''
     
-    # 3. MANUAL INJECTION: Open the file and insert the HTML
+    # 3. Inject custom HTML enhancements
+    referrer_meta = (
+        '<meta name="referrer" '
+        'content="strict-origin-when-cross-origin">'
+    )
+
+    print("Referrer tag injected")
     with open(output_path, "r", encoding="utf-8") as f:
         html_content = f.read()
 
+    updated_html = html_content.replace(
+    '<meta http-equiv="content-type" content="text/html; charset=UTF-8" />',
+    (
+        '<meta http-equiv="content-type" '
+        'content="text/html; charset=UTF-8" />\n'
+        f'{referrer_meta}'
+    ),
+    1,
+)
+
     # Find the closing body tag and insert the legend before it
-    updated_html = html_content.replace("</body>", f"{legend_html}</body>")
+    updated_html = updated_html.replace(
+        "</body>", 
+        f"{legend_html}</body>",
+        1,
+    )
 
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(updated_html)
 
+    logger.info(
+        "Map generated successfully: %s",
+        os.path.abspath(output_path)
+    )
+
     #print("Map and Legend generated successfully.")
 
-    # This will open the map file in the default browser automatically.
-    full_path = os.path.abspath(output_path)
-    webbrowser.open(f"file://{full_path}")
 
+#=======================================================================
+# Modern browsers may block external map tiles when the
+# file is opened directly via file://.
+#
+# To view the map reliably:
+#
+# python -m http.server 8000
+#
+# Then open:
+# http://localhost:8000/collision_map.html
 

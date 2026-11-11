@@ -48,6 +48,7 @@ def render_incident_map(
     if show_markers:
         marker_cluster = MarkerCluster().add_to(m)
 
+
     def get_marker_colour(severity_code):
         """Return the marker colour associated with the given severity code."""
 

@@ -211,18 +211,19 @@ west_yorkshire_traffic_analysis/
 ├── screenshots/           # Images of charts/Streamlit UI
 ├── data/                  # CSV data files
 ├── src/
-|   ├── analysis/                 # Analysis suite
-|   |       ├── blackspots.py                 
-|   |       ├── demographics.py             
-|   |       ├── environmental.py           
-|   |       ├── geography.py
-|   |       ├── infrastructure.py                 
-|   |       ├── mapping.py             
-|   |       ├── report_generator.py
-|   |       ├── report_service.py     
-|   |       ├── summary_analysis.py
-|   |       └── temporal.py               
-|   |       
+|   ├── analysis/                   # Analysis suite
+|   |       ├── blackspots.py       # Accident hotspot detection         
+|   |       ├── demographics.py     # Casualty and Vehicle demogrpahics          
+|   |       ├── environmental.py    # Weather and Road conditions         
+|   |       ├── geography.py        # District and location analysis
+|   |       ├── infrastructure.py   # Road and junction analysis
+|   |       ├── mapping.py          # Interactive map generation     
+|   |       ├── report_generator.py # PDF report creation
+|   |       ├── report_service.py   # Report orchestration layer
+|   |       ├── summary_analysis.py # Executive summary generation
+|   |       └── temporal.py         # Time and date analysis
+|   |  
+|   ├── data_sources.py   # Central dataset path registry 
 |   ├── map_utils.py      # Geospatial mapping utilities
 |   ├── filters.py        # Dashboard filtering logic
 |   ├── sidebars.py       # Sidebar filters and returns the user's selections.
@@ -231,12 +232,12 @@ west_yorkshire_traffic_analysis/
 │   └── load_data.py      # Data loading and preprocessing
 |
 ├── tests/                 # Pytest suite
-├── .gitignore
+├── .gitignore             # Excluded files and folders
 ├── pyproject.toml         # Project dependencies
 ├── conftest.py            # Pytest config helper file
-├── LICENSE.md.
-├── CONTRIBUTING.md
-└── README.md              # Project notes
+├── LICENSE.md.            # Project license terms
+├── CONTRIBUTING.md        # Contribution guidelines
+└── README.md              # Project documentation
 ```
 
 ---
@@ -318,7 +319,9 @@ pytest
 ## 🛣️ Roadmap Features
 
 - [x] Interactive Map Layers
-- [ ] Streamlit PDF generation
+- [x] Streamlit PDF generation
+- [x] Report Filter Alignment
+- [x] 2025 Dataset Integration
 - [ ] District Comparison Dashboard
 - [ ] Comparative Year Analysis
 - [ ] Automated Hotspot Detection

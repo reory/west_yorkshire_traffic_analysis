@@ -6,11 +6,19 @@ def identify_blackspots(df, top_n=10, min_accidents=2):
     """Uses NumPy, Pandas and Geocoder to identify 
     high-frequency accident locations."""
 
+    # Remove records without coordinates
+    location_df = df.dropna(
+        subset=["latitude", "longitude"]
+    ).copy()
+
+    if location_df.empty:
+        return []
+
     # Round coordinates to 2 decimal places (~1km precision)
     # This creates broader geographical clusters and highlights
     # recurring accident locations within the same local area.
-    lats = np.round(df["latitude"].to_numpy(), 2)
-    lons = np.round(df["longitude"].to_numpy(), 2)
+    lats = np.round(location_df["latitude"].to_numpy(), 2)
+    lons = np.round(location_df["longitude"].to_numpy(), 2)
 
     # Use numpy to find unique coordinate pairs and their counts.
     coords = np.column_stack((lats, lons))
@@ -41,10 +49,11 @@ def identify_blackspots(df, top_n=10, min_accidents=2):
         area_name = results[0]['admin2']
         
         # Get the most common road type at this specific spot for context.
-        mask = (np.round(df["latitude"], 2) == lat) & (
-            np.round(df["longitude"], 2) == lon)
+        mask = (np.round(location_df["latitude"], 2) == lat) & (
+            np.round(location_df["longitude"], 2) == lon)
         
-        road_info = df[mask][
+        # Get the most common road type
+        road_info = location_df[mask][
             "display_road_type"
             ].mode().iloc[0] if not df[mask].empty else "Unknown"
         
@@ -64,6 +73,7 @@ def identify_blackspots(df, top_n=10, min_accidents=2):
             }
         )
     
+    # Filter qualifying blackspots
     return [
         spot
         for spot in blackspots_results

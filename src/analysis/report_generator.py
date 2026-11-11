@@ -8,11 +8,15 @@ class WYTrafficReport(FPDF):
     """Generate a traffic report with all the findings."""
 
     def header(self):
+        """Creates the report header."""
+
         self.set_font("Arial", "B", 12)
         self.cell(0, 10, "West Yorkshire Traffic Analysis Report", 0, 1, "C")
         self.ln(5)
 
     def footer(self):
+        """Creates the report footer."""
+
         self.set_y(-15)
         self.set_font("Arial", "I", 8)
         self.cell(0, 10, f"Page {self.page_no()}", 0, 0, "C")

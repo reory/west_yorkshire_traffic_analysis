@@ -15,7 +15,7 @@ def analyse_road_type_distribution(df):
         color="#56CF5AFF"
     )
 
-# Urban/Rural x Speed Limit.
+
 def analyse_urban_rural_proportion(df):
     """Compares the proportion of accidents in urban vs rural areas."""
 
@@ -31,6 +31,7 @@ def analyse_urban_rural_proportion(df):
         colors=["#8cb49d", "#fd0707"]
     )
 
+
 def analyse_speed_limit_distribution(df):
     """Visualises the frequency of collisions at different speed limits."""
     
@@ -43,6 +44,7 @@ def analyse_speed_limit_distribution(df):
         "Number of Collisions",
         color="#3cbaf0ff"
     )
+
 
 def run_infrastructure_suite(df):
     """Executes the full infrastructure analysis."""
