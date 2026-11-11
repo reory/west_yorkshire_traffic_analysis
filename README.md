@@ -262,7 +262,7 @@ Data is filtered and analysed for:
 
 ## 🧰 Tech Stack
 
-* **Python 3.10** (Development Environment)
+* **Python 3.12** (Development Environment)
 * **Streamlit**: For the web interface.
 * **Pandas**: For high-performance data manipulation.
 * **Folium/Leaflet**: For interactive geospatial mapping.
